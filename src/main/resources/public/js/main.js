@@ -16,8 +16,8 @@ angular.module("login_form",[])
                 },
                 function(error) {
                     console.log(error.data);
-                    exampleInputEmail1.value = '';
                     exampleInputPassword1.value = '';
+                    exampleInputEmail1.style.color = 'red';
                     window.alert(error.data.message);
                 }
             );

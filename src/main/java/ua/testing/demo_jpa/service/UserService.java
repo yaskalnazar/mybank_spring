@@ -42,10 +42,10 @@ public class UserService {
         User user = findByUserEmail(userDTO);
         if (user == null) {
             log.warn("NoSuchUserException");
-            throw new NoSuchUserException("User with this email has not been found, please try again");
+            throw new NoSuchUserException("Incorrect data, please try again.");
         } else if (!user.getPassword().equals(userDTO.getPassword())) {
             log.warn("IncorrectPasswordException");
-            throw new IncorrectPasswordException("Wrong password, please try again");
+            throw new IncorrectPasswordException("Incorrect data, please try again.");
         }
         log.info("{}", "Authorized"+user);
         return user;

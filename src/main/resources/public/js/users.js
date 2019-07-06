@@ -13,7 +13,6 @@ angular.module("users_form",[])
                 },
                 function(error) {
                     console.log(error.data)
-                    //console.log("userCtrl error")
                     window.alert(error.data.message);
                 }
             );

@@ -34,16 +34,11 @@ angular.module("registration_form",[])
                 },
                 (error) => {
                     console.log(error.data)
-                    resultMessageEl.style.color = 'red';
-                    inputFirstNameLabel.style.color = 'red';
-                    inputLastNameLabel.style.color = 'red';
-                    inputEmailLabel.style.color = 'red';
-                    inputPasswordLabel.style.color = 'red';
-                    exampleInputFirstNameEl.value = '';
-                    exampleInputLastNameEl.value = '';
-                    exampleInputEmailEl.value= '';
+                    //resultMessageEl.style.color = 'red';
+                    exampleInputEmailEl.style.color = 'red';
                     exampleInputPasswordNameEl.value = '';
-                    $scope.message = error.data.message;
+                    //$scope.message = error.data.message;
+                    window.alert(error.data.message);
                 }
             );
         }
