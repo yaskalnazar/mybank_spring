@@ -15,10 +15,18 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <h2 class="page-header"><@spring.message "login.title"/></h2>
-            <form style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)">
+
+            <#if logout>
+                <div class="alert alert-success" role="alert"><@spring.message "message.logout"/></div>
+            </#if>
+            <#if error>
+                <div class="alert alert-warning" role="alert"><@spring.message "message.login.error"/></div>
+            </#if>
+            <form method="post" style="margin-bottom: 30px" name="form" autocomplete="off" ">
                 <div class="form-group">
                     <label for="exampleInputEmail1"><@spring.message "holder.email"/></label>
                     <input type="email"
+                           name="email"
                            class="form-control"
                            id="exampleInputEmail1"
                            placeholder=<@spring.message "holder.email"/>
@@ -29,12 +37,13 @@
                     <label for="exampleInputPassword1"><@spring.message "holder.password"/></label>
                     <input type="password"
                            class="form-control"
+                           name="password"
                            id="exampleInputPassword1"
                            placeholder=<@spring.message "holder.password"/>
                            required
                            ng-model="auth.password">
                 </div>
-                <button type="submit" class="btn btn-success" style="margin-top:30px" ng-disabled="form.$invalid">
+                <button type="submit" class="btn btn-success" style="margin-top:30px" >
                     <@spring.message "holder.submit"/>
                 </button>
                 <button class="btn btn-success" style="margin-top:30px" onclick="window.location.href = '/form';">
@@ -44,6 +53,5 @@
         </div>
     </div>
 </div>
-<#--<script type="text/javascript" src="/js/main.js"></script>-->
 </body>
 </html>

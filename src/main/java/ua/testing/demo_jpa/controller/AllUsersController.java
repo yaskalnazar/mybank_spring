@@ -5,35 +5,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ua.testing.demo_jpa.dto.UserDTO;
 import ua.testing.demo_jpa.dto.UsersDTO;
-import ua.testing.demo_jpa.entity.RoleType;
-import ua.testing.demo_jpa.entity.User;
-import ua.testing.demo_jpa.exeptions.IncorrectPasswordException;
-import ua.testing.demo_jpa.exeptions.NoSuchUserException;
 import ua.testing.demo_jpa.service.UserService;
-
-import java.util.List;
 
 @Slf4j
 @RestController
 @RequestMapping(value = "/")
-public class LoginFormController {
+public class AllUsersController {
 
     private final UserService userService;
 
     @Autowired
-    public LoginFormController(UserService userService) {
+    public AllUsersController(UserService userService) {
         this.userService = userService;
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public void loginFormController(UserDTO user){
-        log.info("{}", user);
-
-        userService.userAuthorization(user);
-    }
 
     @RequestMapping(value = "user", method = RequestMethod.GET)
     public UsersDTO getAllUser(){

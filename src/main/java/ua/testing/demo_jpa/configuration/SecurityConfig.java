@@ -22,11 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/js/*", "/form").permitAll()
+                .antMatchers("/js/*", "/form","/resources/templates/navbar.ftl").permitAll()
                 .anyRequest().authenticated()
                 //.antMatchers("/api/all_users", "/all_users").hasAuthority("ADMIN")
                 .and()
-                .formLogin().loginPage("/api").usernameParameter("email").permitAll()
+                .formLogin().loginPage("/login").usernameParameter("email").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
                 .and()
