@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageController {
-    @RequestMapping("/api")
+    @RequestMapping("/")
     public String mainPage(){
-        return "index.html";
+        return "login";
     }
 
-    @RequestMapping("/all_user")
+    @RequestMapping("/all_users")
     public String userPage(){
-        return "users/index.html";
+        return "all_users";
     }
 
     @RequestMapping("/form")

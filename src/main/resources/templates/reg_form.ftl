@@ -12,8 +12,6 @@
 </head>
 <body ng-app="registration_form" ng-controller="AppCtrl">
 <#include "navbar.ftl">
-<div class="col-md-8 col-md-offset-2">
-</div>
 <div class="container" style="margin-top: 60px">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -22,7 +20,7 @@
             <h2 class="page-header"><@spring.message "registration.form.title"/></h2>
             <form style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)">
                 <div class="form-group">
-                    <label id="inputFirstNameLabel" for="exampleInputFirstName">First name</label>
+                    <label id="inputFirstNameLabel" for="exampleInputFirstName"><@spring.message "holder.first.name"/></label>
                     <input type="text"
                            class="form-control"
                            id="exampleInputFirstName"
@@ -31,7 +29,7 @@
                            ng-model="auth.firstName">
                 </div>
                 <div class="form-group">
-                    <label id="inputLastNameLabel" for="exampleInputLastName">Last Name</label>
+                    <label id="inputLastNameLabel" for="exampleInputLastName"><@spring.message "holder.last.name"/></label>
                     <input type="text"
                            class="form-control"
                            id="exampleInputLastName"
@@ -40,7 +38,7 @@
                            ng-model="auth.lastName">
                 </div>
                 <div class="form-group">
-                    <label id="inputEmailLabel" for="exampleInputEmail">Email</label>
+                    <label id="inputEmailLabel" for="exampleInputEmail"><@spring.message "holder.email"/></label>
                     <input type="email"
                            class="form-control"
                            id="exampleInputEmail"
@@ -49,7 +47,7 @@
                            ng-model="auth.email">
                 </div>
                 <div class="form-group">
-                    <label id="inputPasswordLabel" for="exampleInputPassword">Password</label>
+                    <label id="inputPasswordLabel" for="exampleInputPassword"><@spring.message "holder.password"/></label>
                     <input type="password"
                            class="form-control"
                            id="exampleInputPassword"
@@ -59,6 +57,9 @@
                 </div>
                 <button type="submit" class="btn btn-success" style="margin-top:30px" ng-disabled="form.$invalid">
                     <@spring.message "holder.submit"/>
+                </button>
+                <button class="btn btn-success" style="margin-top:30px" onclick="window.location.href = '/';">
+                    <@spring.message "login.title"/>
                 </button>
             </form>
         </div>
