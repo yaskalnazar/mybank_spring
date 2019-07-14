@@ -46,7 +46,7 @@
                 <button type="submit" class="btn btn-success" style="margin-top:30px" >
                     <@spring.message "holder.submit"/>
                 </button>
-                <button class="btn btn-success" style="margin-top:30px" onclick="window.location.href = '/form';">
+                <button class="btn btn-secondary" style="margin-top:30px" onclick="window.location.href = '/form';">
                     <@spring.message "registration.button.title"/>
                 </button>
             </form>
