@@ -1,3 +1,4 @@
+<#import "/spring.ftl" as spring/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,21 +11,22 @@
     <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 </head>
 <body ng-app="registration_form" ng-controller="AppCtrl">
+<#include "navbar.ftl">
 <div class="col-md-8 col-md-offset-2">
-    <h1>Registration form's Main</h1>
 </div>
 <div class="container" style="margin-top: 60px">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+
             <h3 id="resultMessage">{{message}}</h3>
-            <h2 class="page-header">Registration Form Demo</h2>
+            <h2 class="page-header"><@spring.message "registration.form.title"/></h2>
             <form style="margin-bottom: 30px" name="form" autocomplete="off" novalidate ng-submit="form.$valid && sendForm(auth)">
                 <div class="form-group">
                     <label id="inputFirstNameLabel" for="exampleInputFirstName">First name</label>
                     <input type="text"
                            class="form-control"
                            id="exampleInputFirstName"
-                           placeholder="First Name"
+                           placeholder=<@spring.message "holder.first.name"/>
                            required
                            ng-model="auth.firstName">
                 </div>
@@ -33,7 +35,7 @@
                     <input type="text"
                            class="form-control"
                            id="exampleInputLastName"
-                           placeholder="Last Name"
+                           placeholder=<@spring.message "holder.last.name"/>
                            required
                            ng-model="auth.lastName">
                 </div>
@@ -42,7 +44,7 @@
                     <input type="email"
                            class="form-control"
                            id="exampleInputEmail"
-                           placeholder="Email"
+                           placeholder=<@spring.message "holder.email"/>
                            required
                            ng-model="auth.email">
                 </div>
@@ -51,12 +53,12 @@
                     <input type="password"
                            class="form-control"
                            id="exampleInputPassword"
-                           placeholder="Password"
+                           placeholder=<@spring.message "holder.password"/>
                            required
                            ng-model="auth.password">
                 </div>
                 <button type="submit" class="btn btn-success" style="margin-top:30px" ng-disabled="form.$invalid">
-                    Submit
+                    <@spring.message "holder.submit"/>
                 </button>
             </form>
         </div>
