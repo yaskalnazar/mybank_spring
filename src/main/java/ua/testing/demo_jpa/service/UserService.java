@@ -1,7 +1,11 @@
 package ua.testing.demo_jpa.service;
 
+import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.NestedExceptionUtils;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.testing.demo_jpa.dto.UserDTO;
 import ua.testing.demo_jpa.dto.UsersDTO;
@@ -18,10 +22,10 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(@NonNull UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -34,11 +38,12 @@ public class UserService {
         return new UsersDTO(users);
     }
 
-    public User findByUserEmail(UserDTO userDTO) {
+    public User findByUserEmail(@NonNull UserDTO userDTO) {
         return userRepository.findByEmail(userDTO.getEmail());
     }
 
-    public User userAuthorization(UserDTO userDTO){
+    public User userAuthorization(@NonNull UserDTO userDTO){
+        log.warn("NoSuchUserException");
         User user = findByUserEmail(userDTO);
         if (user == null) {
             log.warn("NoSuchUserException");
@@ -51,7 +56,7 @@ public class UserService {
         return user;
     }
 
-    public void saveNewUser(User user) {
+    public void saveNewUser(@NonNull User user) {
         try {
             userRepository.save(user);
         } catch (Exception ex) {
@@ -75,4 +80,13 @@ public class UserService {
     }
 
 
+    @Override
+    public UserDetails loadUserByUsername(@NonNull String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            return user;
+        } else {
+            throw new UsernameNotFoundException(email);
+        }
+    }
 }

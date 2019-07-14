@@ -58,7 +58,7 @@
                 <button type="submit" class="btn btn-success" style="margin-top:30px" ng-disabled="form.$invalid">
                     <@spring.message "holder.submit"/>
                 </button>
-                <button class="btn btn-success" style="margin-top:30px" onclick="window.location.href = '/';">
+                <button class="btn btn-success" style="margin-top:30px" onclick="window.location.href = '/api';">
                     <@spring.message "login.title"/>
                 </button>
             </form>

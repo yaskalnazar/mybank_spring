@@ -1,8 +1,12 @@
 package ua.testing.demo_jpa.entity;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,7 +18,7 @@ import javax.persistence.*;
 @Entity
 @Table( name="user",
         uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
@@ -28,6 +32,19 @@ public class User {
     @Column(nullable = false)
     private String password;
     @Column(name = "role")
-    @Enumerated(EnumType.STRING)
-    private RoleType role;
+
+    @ElementCollection(targetClass = RoleType.class, fetch = FetchType.EAGER)
+    private List<RoleType> authorities;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enabled;
+
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+
 }

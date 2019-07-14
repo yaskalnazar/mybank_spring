@@ -20,13 +20,15 @@
         <th><@spring.message "holder.last.name"/></th>
         <th><@spring.message "holder.email"/></th>
         <th><@spring.message "holder.role"/></th>
+        <th>Password</th>
     </tr>
     <tr ng-repeat="u in users">
         <td>{{u.id}}</td>
         <td>{{u.firstName}}</td>
         <td>{{u.lastName}}</td>
         <td>{{u.email}}</td>
-        <td>{{u.role}}</td>
+        <td>{{u.authorities}}</td>
+        <td>{{u.password}}</td>
     </tr>
 </table>
 <script type="text/javascript" src="../js/users.js"></script>

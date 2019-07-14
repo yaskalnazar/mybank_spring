@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PageController {
-    @RequestMapping("/")
+    @RequestMapping("/api")
     public String mainPage(){
         return "login";
     }
@@ -19,4 +19,6 @@ public class PageController {
     public String regForm(){
         return "reg_form";
     }
+
+
 }
