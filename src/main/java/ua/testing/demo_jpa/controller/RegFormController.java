@@ -38,9 +38,8 @@ public class RegFormController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/reg_form", method = RequestMethod.POST)
-    public void registrationFormController(NoteDTO note){
+    public void registrationFormController(@NonNull NoteDTO note){
         log.info("{}", note);
-        if (note != null) {
             userService.saveNewUser(User.builder()
                     .firstName(note.getFirstName())
                     .lastName(note.getLastName())
@@ -52,7 +51,6 @@ public class RegFormController {
                     .enabled(true)
                     .authorities(Arrays.asList(RoleType.ROLE_USER))
                     .build());
-        }
 
     }
 

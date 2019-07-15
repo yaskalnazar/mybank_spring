@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageController {
+    @RequestMapping("/")
+    public String helloPage(){
+        return "main";
+    }
+
     @RequestMapping("/api")
     public String mainPage(){
         return "login";
