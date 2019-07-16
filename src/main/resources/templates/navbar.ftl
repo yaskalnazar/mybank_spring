@@ -4,9 +4,6 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><@spring.message "navbar.search"/></button>
     </form>
     <span style="float: right">
-                        <@spring.message "language"/>:
-                        <a href="?language=en">Eng</a>
-                        |
-                        <a href="?language=uk">Укр</a>
+        <@spring.message "language"/>: <a href="?language=en">Eng</a> | <a href="?language=uk">Укр</a>
     </span>
 </nav>

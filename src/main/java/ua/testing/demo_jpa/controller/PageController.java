@@ -12,11 +12,6 @@ public class PageController {
         return "main";
     }
 
-    @RequestMapping("/api")
-    public String mainPage(){
-        return "login";
-    }
-
     @RequestMapping("/all_users")
     public String userPage(){
         return "all_users";

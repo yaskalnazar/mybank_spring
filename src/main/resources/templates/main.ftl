@@ -13,6 +13,19 @@
 </head>
 <body>
 <#include "navbar.ftl">
-<h1>Hello, world!</h1>
+<div class="container" style="margin-top: 60px">
+    <div class="d-flex justify-content-center">
+        <div class="col-md-8 col-md-offset-2">
+    <h1>Hello, world!</h1>
+    <button class="btn btn-primary" style="margin-top:30px" onclick="window.location.href = '/login';">
+        <@spring.message "login.title"/>
+    </button>
+    <button class="btn btn-success" style="margin-top:30px" onclick="window.location.href = '/form';">
+        <@spring.message "registration.button.title"/>
+    </button>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>

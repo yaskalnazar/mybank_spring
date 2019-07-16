@@ -61,6 +61,9 @@
                 <button class="btn btn-secondary" style="margin-top:30px" onclick="window.location.href = '/login';">
                     <@spring.message "login.title"/>
                 </button>
+<#--
+                <input name="${_csrf.parameterName}" value="${_csrf.token}" type="hidden" />
+-->
             </form>
         </div>
     </div>

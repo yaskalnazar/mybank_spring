@@ -31,7 +31,6 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
-    @Column(name = "role")
 
     @ElementCollection(targetClass = RoleType.class, fetch = FetchType.EAGER)
     private List<RoleType> authorities;
