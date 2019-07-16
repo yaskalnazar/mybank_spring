@@ -10,6 +10,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import ua.testing.demo_jpa.entity.RoleType;
+import ua.testing.demo_jpa.handler.RestAccessDeniedHandler;
 import ua.testing.demo_jpa.service.UserService;
 
 @Configuration
@@ -18,15 +20,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RestAccessDeniedHandler accessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/all_users").authenticated()
+                .antMatchers("/").authenticated()
+                .antMatchers("/all_users").hasAuthority(RoleType.ROLE_ADMIN.name())
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("email").permitAll()
                 .and()
                 .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).permitAll()
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler)
                 .and()
                 .csrf().disable();
     }
