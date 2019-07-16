@@ -52,6 +52,7 @@ public class RegFormController {
                     .authorities(Arrays.asList(RoleType.ROLE_USER))
                     .build());
 
+
     }
 
     @ExceptionHandler(RuntimeException.class)

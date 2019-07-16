@@ -20,7 +20,11 @@
         <th><@spring.message "holder.last.name"/></th>
         <th><@spring.message "holder.email"/></th>
         <th><@spring.message "holder.role"/></th>
-        <th>Password</th>
+        <th><@spring.message "holder.password"/></th>
+        <th><@spring.message "holder.accountNonExpired"/></th>
+        <th><@spring.message "holder.accountNonLocked"/></th>
+        <th><@spring.message "holder.credentialsNonExpired"/></th>
+        <th><@spring.message "holder.enabled"/></th>
     </tr>
     <tr ng-repeat="u in users">
         <td>{{u.id}}</td>
@@ -29,6 +33,10 @@
         <td>{{u.email}}</td>
         <td>{{u.authorities}}</td>
         <td>{{u.password}}</td>
+        <td>{{u.accountNonExpired}}</td>
+        <td>{{u.accountNonLocked}}</td>
+        <td>{{u.credentialsNonExpired}}</td>
+        <td>{{u.enabled}}</td>
     </tr>
 </table>
 <script type="text/javascript" src="../js/users.js"></script>

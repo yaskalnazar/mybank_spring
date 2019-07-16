@@ -16,7 +16,7 @@
 <div class="container" style="margin-top: 60px">
     <div class="d-flex justify-content-center">
         <div class="col-md-8 col-md-offset-2">
-    <h1>Hello, world!</h1>
+    <h1><@spring.message "main.hello"/></h1>
     <button class="btn btn-primary" style="margin-top:30px" onclick="window.location.href = '/login';">
         <@spring.message "login.title"/>
     </button>
