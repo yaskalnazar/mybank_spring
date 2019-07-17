@@ -1,18 +1,28 @@
 package ua.testing.demo_jpa.controller;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.testing.demo_jpa.entity.RoleType;
+import ua.testing.demo_jpa.entity.User;
+import ua.testing.demo_jpa.service.UserService;
 
+@Slf4j
 @Controller
 public class PageController {
+
     @RequestMapping("/")
     public String helloPage(){
-        return "main";
+        if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof AnonymousAuthenticationToken) {
+            return "redirect:/login";
+        } else {
+            return "redirect:/home";
+        }
     }
 
     @RequestMapping("/all_users")
@@ -34,5 +44,7 @@ public class PageController {
 
         return "login";
     }
+
+
 
 }

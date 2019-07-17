@@ -3,12 +3,14 @@ package ua.testing.demo_jpa.service;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.NestedExceptionUtils;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.testing.demo_jpa.dto.UserDTO;
 import ua.testing.demo_jpa.dto.UsersDTO;
+import ua.testing.demo_jpa.entity.RoleType;
 import ua.testing.demo_jpa.entity.User;
 import ua.testing.demo_jpa.exeptions.EmailAlreadyUsedException;
 import ua.testing.demo_jpa.exeptions.IncorrectPasswordException;
@@ -61,19 +63,15 @@ public class UserService implements UserDetailsService {
             userRepository.save(user);
         } catch (Exception ex) {
             int errorCode = 0;
-
             Throwable specificException = NestedExceptionUtils.getMostSpecificCause(ex);
-
             if (specificException instanceof SQLException) {
                 SQLException sqlException = (SQLException)specificException;
                 errorCode = sqlException.getErrorCode();
             }
-
             if (errorCode == 1062) {
                 log.warn("Email already used");
                 throw new EmailAlreadyUsedException("This email already used, please try another");
             }
-
             throw ex;
         }
 
@@ -89,4 +87,10 @@ public class UserService implements UserDetailsService {
             throw new UsernameNotFoundException(email);
         }
     }
+
+    public User getCurrentUser(){
+        return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    }
+
+
 }
