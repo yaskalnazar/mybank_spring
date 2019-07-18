@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Getter
@@ -31,8 +30,10 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
+   @ElementCollection(targetClass = Account.class)
+   List<Account> accounts;
 
-    @ElementCollection(targetClass = RoleType.class, fetch = FetchType.EAGER)
+    @ElementCollection(targetClass = RoleType.class)
     private List<RoleType> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
@@ -46,4 +47,14 @@ public class User implements UserDetails {
     }
 
 
+    public enum RoleType implements GrantedAuthority {
+        ROLE_ADMIN,
+        ROLE_USER,
+        ROLE_ANONYMOUS;
+
+        @Override
+        public String getAuthority() {
+            return name();
+        }
+    }
 }

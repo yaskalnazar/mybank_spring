@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import ua.testing.demo_jpa.entity.RoleType;
 import ua.testing.demo_jpa.entity.User;
 import ua.testing.demo_jpa.service.UserService;
 
@@ -19,9 +18,9 @@ public class HomeController {
     @GetMapping("/home")
     public String home(){
         User user = userService.getCurrentUser();
-        if (user.getAuthorities().contains(RoleType.ROLE_ADMIN)){
+        if (user.getAuthorities().contains(User.RoleType.ROLE_ADMIN)){
             return "redirect:/admin/home";
-        } else if (user.getAuthorities().contains(RoleType.ROLE_USER)){
+        } else if (user.getAuthorities().contains(User.RoleType.ROLE_USER)){
             return "redirect:/user/home";
         } else {
             return "redirect:/logout";

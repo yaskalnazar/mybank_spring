@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import ua.testing.demo_jpa.entity.RoleType;
+import ua.testing.demo_jpa.entity.User;
 import ua.testing.demo_jpa.handler.RestAccessDeniedHandler;
 import ua.testing.demo_jpa.service.UserService;
 
@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/","/form","/login").permitAll()
-                .antMatchers("/all_users").hasAuthority(RoleType.ROLE_ADMIN.name())
+                .antMatchers("/all_users").hasAuthority(User.RoleType.ROLE_ADMIN.name())
                 .and()
                 .formLogin().loginPage("/login").usernameParameter("email").permitAll()
                 .defaultSuccessUrl("/home", true)

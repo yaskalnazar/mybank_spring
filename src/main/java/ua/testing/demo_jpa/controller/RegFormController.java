@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.testing.demo_jpa.configuration.SecurityConfiguration;
 import ua.testing.demo_jpa.dto.NoteDTO;
-import ua.testing.demo_jpa.entity.RoleType;
 import ua.testing.demo_jpa.entity.User;
 import ua.testing.demo_jpa.service.UserService;
 
@@ -44,7 +43,7 @@ public class RegFormController {
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
                     .enabled(true)
-                    .authorities(Arrays.asList(RoleType.ROLE_USER))
+                    .authorities(Arrays.asList(User.RoleType.ROLE_USER))
                     .build());
 
 

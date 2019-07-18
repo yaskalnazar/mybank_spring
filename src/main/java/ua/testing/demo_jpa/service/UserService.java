@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import ua.testing.demo_jpa.dto.UserDTO;
 import ua.testing.demo_jpa.dto.UsersDTO;
-import ua.testing.demo_jpa.entity.RoleType;
 import ua.testing.demo_jpa.entity.User;
 import ua.testing.demo_jpa.exeptions.EmailAlreadyUsedException;
 import ua.testing.demo_jpa.exeptions.IncorrectPasswordException;
