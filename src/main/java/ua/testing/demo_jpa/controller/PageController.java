@@ -25,11 +25,6 @@ public class PageController {
         }
     }
 
-    @RequestMapping("/all_users")
-    public String userPage(){
-        return "all_users";
-    }
-
     @RequestMapping("/form")
     public String regForm(){
         return "reg_form";

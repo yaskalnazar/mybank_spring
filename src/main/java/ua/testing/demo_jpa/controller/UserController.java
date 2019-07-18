@@ -20,4 +20,10 @@ public class UserController {
         model.addAttribute("user", userService.getCurrentUser());
         return "user_home";
     }
+
+    @RequestMapping(value = "/account")
+    public String account(Model model){
+        model.addAttribute("user", userService.getCurrentUser());
+        return "user_home";
+    }
 }

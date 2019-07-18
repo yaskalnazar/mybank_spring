@@ -20,4 +20,9 @@ public class AdminController {
         model.addAttribute("user", userService.getCurrentUser());
         return "admin_home";
     }
+
+    @RequestMapping("/all_users")
+    public String userPage(){
+        return "all_users";
+    }
 }
