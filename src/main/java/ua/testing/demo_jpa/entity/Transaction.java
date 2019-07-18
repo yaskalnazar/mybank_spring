@@ -1,6 +1,8 @@
 package ua.testing.demo_jpa.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table( name="transaction",
@@ -10,4 +12,12 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private long id;
+    @Column(nullable = false)
+    private long senderAccountId;
+    @Column(nullable = false)
+    private long receiverAccountId;
+    @Column(nullable = false)
+    private BigDecimal transactionAmount;
+    @Column(nullable = false)
+    private LocalDate date;
 }

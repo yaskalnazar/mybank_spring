@@ -10,7 +10,7 @@
                 <a class="nav-link" href="/user/home">Home<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/user/account">My account</a>
+                <a class="nav-link" href="/user/account/all_accounts/">My accounts</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/user/payments">My payments</a>

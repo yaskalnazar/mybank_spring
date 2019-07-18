@@ -10,24 +10,26 @@
 
 </head>
 <body>
-<#include "parts/admin_navnar.ftl">
-<@spring.message "all.users"/>:</h1>
+<#include "../parts/admin_navnar.ftl">
+<h1>All accounts:</h1>
 <#if accounts?has_content>
 
 <table class="table">
     <thead>
     <tr>
-        <th>1</th>
-        <th>2</th>
-        <th>3</th>
-        <th>4</th>
-        <th>5</th>
+        <th>ID</th>
+        <th>Owner ID</th>
+        <th>Balance</th>
+        <th>Status</th>
+        <th>ClosingDate</th>
+        <th>AccountType</th>
     </tr>
     </thead>
     <tbody>
     <#list accounts as account>
     <tr>
         <td>${account.getId()}</td>
+        <td>${account.getOwnerId()}</td>
         <td>${account.getBalance()}</td>
         <td>${account.getStatus()}</td>
         <td>${account.getClosingDate()}</td>

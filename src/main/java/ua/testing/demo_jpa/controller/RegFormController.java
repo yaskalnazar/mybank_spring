@@ -43,7 +43,7 @@ public class RegFormController {
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
                     .enabled(true)
-                    .authorities(Arrays.asList(User.RoleType.ROLE_ADMIN))
+                    .authorities(Arrays.asList(User.RoleType.ROLE_USER))
                     .build());
 
 

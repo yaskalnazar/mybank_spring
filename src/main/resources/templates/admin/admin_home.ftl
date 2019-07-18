@@ -6,7 +6,7 @@
     <title>Bank</title>
 </head>
 <body>
-<#include "parts/user_navbar.ftl">
+<#include "../parts/admin_navnar.ftl">
 <div class="container" style="margin-top: 60px">
     <div class="d-flex justify-content-center">
         <div class="col-md-8 col-md-offset-2">

@@ -24,18 +24,18 @@ public class AdminController {
     @RequestMapping(value = "/home")
     public String home(Model model){
         model.addAttribute("user", userService.getCurrentUser());
-        return "admin_home";
+        return "admin/admin_home";
     }
 
     @RequestMapping("/all_users")
     public String userPage(){
-        return "all_users";
+        return "admin/all_users";
     }
 
     @RequestMapping("/all_accounts")
     public String all_accounts(Map<String, Object> model){
         Iterable<Account> accounts = accountService.getAllAccounts().getAccounts();
         model.put("accounts", accounts);
-        return "all_accounts";
+        return "admin/all_accounts";
     }
 }

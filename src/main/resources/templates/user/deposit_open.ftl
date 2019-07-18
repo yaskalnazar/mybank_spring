@@ -16,7 +16,7 @@
     </script>
 </head>
 <body ng-app="login_form" ng-controller="AppCtrl">
-<#include "parts/user_navbar.ftl">
+<#include "../parts/user_navbar.ftl">
 <div class="container" style="margin-top: 60px">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -28,15 +28,20 @@
             </#if>
             <form method="post"  style="margin-bottom: 30px" name="form" autocomplete="off" ">
             <div class="form-group">
-                <label>depositAmount<input type="number" min="1000" name="depositAmount" required></label>
-                <input id="depositRate" type="number" name="depositRate" min="0" value="0.015" readonly>
-                <select name="monthsAmount" id="monthsAmount" oninput="change()">
+                <p>
+                <label>Deposit Amount:<input class="form-control" type="number" min="1000" name="depositAmount" required></label>
+                </p>
+                <label>Deposit Rate:
+                <input class="form-control" id="depositRate" type="number" name="depositRate" min="0" value="0.015" readonly>
+                </label>
+                <label>Months Amount:
+                <select class="form-control" name="monthsAmount" id="monthsAmount" oninput="change()">
                     <option value=3>3 months</option>
                     <option value=6>6 months</option>
                     <option value=9>9 months</option>
                     <option value=12>12 months</option>
                 </select>
-
+                </label>
             </div>
             <button type="submit" class="btn btn-success" style="margin-top:30px" >
                 <@spring.message "holder.submit"/>

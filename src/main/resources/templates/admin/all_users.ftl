@@ -10,7 +10,7 @@
 
 </head>
 <body ng-app="users_form" ng-controller="UserCtrl">
-<#include "parts/admin_navnar.ftl">
+<#include "../parts/admin_navnar.ftl">
 <h1 data-ng-init="getUsers()"><@spring.message "all.users"/>:</h1>
 
 <table ng-model="users"  class="table">

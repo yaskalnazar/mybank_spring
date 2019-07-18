@@ -17,6 +17,7 @@ import ua.testing.demo_jpa.service.UserService;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Map;
 
 @Slf4j
 @Controller
@@ -30,7 +31,7 @@ public class AccountController {
 
     @GetMapping(value = "/deposit/open/")
     public String openDeposit(Model model){
-        return "deposit_open";
+        return "user/deposit_open";
     }
 
     @PostMapping(value = "/deposit/open/")
@@ -51,7 +52,14 @@ public class AccountController {
         } else {
             model.addAttribute("error", true);
         }
-        return "deposit_open";
-
+        return "user/deposit_open";
     }
+
+    @GetMapping(value = "/all_accounts/")
+    public String allUserAccounts(Map<String, Object> model){
+        Iterable<Account> accounts = accountService.getUserAccounts(userService.getCurrentUser().getId()).getAccounts();
+        model.put("accounts", accounts);
+        return "user/all_accounts";
+    }
+
 }

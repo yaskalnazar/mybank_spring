@@ -29,4 +29,8 @@ public class AccountService {
     public Account saveNewAccount(@NonNull Account account) {
         return accountRepository.save(account);
     }
+
+    public AccountsDTO getUserAccounts(long userId){
+        return new AccountsDTO(accountRepository.findAllByOwnerId(userId));
+    }
 }
