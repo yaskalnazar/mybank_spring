@@ -57,9 +57,9 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public void saveNewUser(@NonNull User user) {
+    public User saveNewUser(@NonNull User user) {
         try {
-            userRepository.save(user);
+            return userRepository.save(user);
         } catch (Exception ex) {
             int errorCode = 0;
             Throwable specificException = NestedExceptionUtils.getMostSpecificCause(ex);

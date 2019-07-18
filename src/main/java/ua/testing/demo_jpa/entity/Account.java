@@ -1,8 +1,7 @@
 package ua.testing.demo_jpa.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -14,6 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Inheritance
+@SuperBuilder
 @SuppressWarnings("ACCOUNT")
 @DiscriminatorColumn(name="accountType",
         discriminatorType = DiscriminatorType.STRING)
@@ -29,7 +29,7 @@ public abstract class Account {
     @Column(name = "closing_date",nullable = false)
     private LocalDate closingDate;
     @Column(nullable = false)
-    private User owner;
+    private long ownerId;
     @Column(nullable = false)
     @ElementCollection(targetClass = Transaction.class, fetch = FetchType.EAGER)
     private List<Transaction> transactions;
@@ -37,11 +37,19 @@ public abstract class Account {
     private AccountStatus status;
 
 
+    public abstract String getAccountType();
+
+
 
     public enum AccountStatus {
         ACTIVE,
         CLOSED,
         BLOCKED;
+    }
+
+    public enum AccountType {
+        CREDIT,
+        DEPOSIT;
     }
 
 

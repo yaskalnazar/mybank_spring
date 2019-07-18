@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <input class="form-control mr-sm-2" type="search" placeholder=<@spring.message "navbar.search"/> aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><@spring.message "navbar.search"/></button>
     </form>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -16,7 +16,7 @@
                 <a class="nav-link" href="/user/payments">My payments</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/user/deposits">Deposits</a>
+                <a class="nav-link" href="/user/account/deposit/open/">Open Deposit</a>
             </li>
         </ul>
     </div>

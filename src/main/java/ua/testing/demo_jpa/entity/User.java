@@ -30,10 +30,10 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
-   @ElementCollection(targetClass = Account.class)
-   List<Account> accounts;
+    @ElementCollection(targetClass = Account.class)
+    List<Account> accounts;
 
-    @ElementCollection(targetClass = RoleType.class)
+    @ElementCollection(targetClass = RoleType.class, fetch = FetchType.EAGER)
     private List<RoleType> authorities;
     private boolean accountNonExpired;
     private boolean accountNonLocked;
