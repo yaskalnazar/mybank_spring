@@ -7,19 +7,13 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/admin/home">Home<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/admin/home"><@spring.message "navbar.home"/><span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/account">My account</a>
+                <a class="nav-link" href="/admin/all_users"><@spring.message "all.users"/></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/all_users">All users</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/all_accounts">All accounts</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/admin/deposit_requests">Deposit requests</a>
+                <a class="nav-link" href="/admin/all_accounts"><@spring.message "all.accounts"/></a>
             </li>
         </ul>
     </div>

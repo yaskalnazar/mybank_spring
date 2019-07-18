@@ -11,9 +11,8 @@
 </head>
 <body>
 <#include "../parts/user_navbar.ftl">
-<h1>All accounts:</h1>
+<#--<h1>All accounts:</h1>
 <#if accounts?has_content>
-
     <table class="table">
         <thead>
         <tr>
@@ -40,6 +39,67 @@
     </table>
 <#else>
     <h1>You don`t have any accounts yet</h1>
+</#if>-->
+<#if depositAccounts?has_content>
+    <h1><@spring.message "deposit.accounts"/></h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th><@spring.message "holder.id"/></th>
+            <th><@spring.message "balance"/></th>
+            <th><@spring.message "status"/></th>
+            <th><@spring.message "closing.date"/></th>
+            <th><@spring.message "amount"/></th>
+            <th><@spring.message "rate"/></th>
+            <th><@spring.message "deposit.end.date"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list depositAccounts as account>
+            <tr>
+                <td>${account.getId()}</td>
+                <td>${account.getBalance()}</td>
+                <td>${account.getStatus()}</td>
+                <td>${account.getClosingDate()}</td>
+                <td>${account.getDepositAmount()}</td>
+                <td>${account.getDepositRate()}</td>
+                <td>${account.getDepositEndDate()}</td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+<#else>
+    <h1><@spring.message "no.deposit.accounts"/></h1>
+</#if>
+
+<#if creditAccounts?has_content>
+    <h1><@spring.message "credit.accounts"/></h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th><@spring.message "holder.id"/></th>
+            <th><@spring.message "balance"/></th>
+            <th><@spring.message "status"/></th>
+            <th><@spring.message "closing.date"/></th>
+            <th><@spring.message "credit.limit"/></th>
+            <th><@spring.message "rate"/></th>
+        </tr>
+        </thead>
+        <tbody>
+        <#list creditAccounts as account>
+            <tr>
+                <td>${account.getId()}</td>
+                <td>${account.getBalance()}</td>
+                <td>${account.getStatus()}</td>
+                <td>${account.getClosingDate()}</td>
+                <td>${account.getCreditLimit()}</td>
+                <td>${account.getCreditRate()}</td>
+            </tr>
+        </#list>
+        </tbody>
+    </table>
+<#else>
+    <h1><@spring.message "no.credit.accounts"/></h1>
 </#if>
 </body>
 </html>

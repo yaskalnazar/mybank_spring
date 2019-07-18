@@ -17,12 +17,12 @@
 <table class="table">
     <thead>
     <tr>
-        <th>ID</th>
-        <th>Owner ID</th>
-        <th>Balance</th>
-        <th>Status</th>
-        <th>ClosingDate</th>
-        <th>AccountType</th>
+        <th><@spring.message "holder.id"/></th>
+        <th><@spring.message "owner.id"/></th>
+        <th><@spring.message "balance"/></th>
+        <th><@spring.message "status"/></th>
+        <th><@spring.message "closing.date"/></th>
+        <th><@spring.message "account.type"/></th>
     </tr>
     </thead>
     <tbody>

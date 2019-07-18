@@ -29,17 +29,17 @@
             <form method="post"  style="margin-bottom: 30px" name="form" autocomplete="off" ">
             <div class="form-group">
                 <p>
-                <label>Deposit Amount:<input class="form-control" type="number" min="1000" name="depositAmount" required></label>
+                <label><@spring.message "deposit"/> <@spring.message "amount"/>:<input class="form-control" type="number" min="1000" name="depositAmount" required></label>
                 </p>
-                <label>Deposit Rate:
+                <label><@spring.message "rate"/>
                 <input class="form-control" id="depositRate" type="number" name="depositRate" min="0" value="0.015" readonly>
                 </label>
-                <label>Months Amount:
+                <label><@spring.message "months.amount"/>
                 <select class="form-control" name="monthsAmount" id="monthsAmount" oninput="change()">
-                    <option value=3>3 months</option>
-                    <option value=6>6 months</option>
-                    <option value=9>9 months</option>
-                    <option value=12>12 months</option>
+                    <option value=5>5 <@spring.message "months"/></option>
+                    <option value=6>6 <@spring.message "months"/></option>
+                    <option value=9>9 <@spring.message "months"/></option>
+                    <option value=12>12 <@spring.message "months"/></option>
                 </select>
                 </label>
             </div>
