@@ -10,7 +10,8 @@
 <div class="container" style="margin-top: 60px">
     <div class="d-flex justify-content-center">
         <div class="col-md-8 col-md-offset-2">
-            <h1><@spring.message "hello"/>: ${user.getFirstName()}</h1>
+            <h3><@spring.message "hello"/>: ${user.getFirstName()}</h3>
+            <#include "../parts/user_main_info.ftl">
         </div>
     </div>
 </div>

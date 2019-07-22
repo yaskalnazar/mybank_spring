@@ -91,5 +91,10 @@ public class UserService implements UserDetailsService {
         return (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     }
 
+    public User loadUserById(@NonNull Long id){
+        return userRepository.findById(id)
+                .orElseThrow(() -> new NoSuchUserException(id.toString()));
+    }
+
 
 }

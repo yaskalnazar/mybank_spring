@@ -4,6 +4,8 @@ import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import ua.testing.demo_jpa.entity.CreditRequest;
+import ua.testing.demo_jpa.exeptions.NoSuchCreditRequestException;
+import ua.testing.demo_jpa.exeptions.NoSuchUserException;
 import ua.testing.demo_jpa.repository.CreditRequestRepository;
 
 @Slf4j
@@ -15,11 +17,17 @@ public class CreditRequestService {
         this.creditRequestRepository = creditRequestRepository;
     }
 
-    public CreditRequest saveNewCreditRequest(@NonNull CreditRequest creditRequest) {
-        return creditRequestRepository.save(creditRequest);
-    }
 
     public Iterable<CreditRequest> getAllCreditRequests() {
         return creditRequestRepository.findAll();
+    }
+
+    public CreditRequest loadCreditRequestById(Long id) {
+        return creditRequestRepository.findById(id)
+                .orElseThrow(() -> new NoSuchCreditRequestException(id.toString()));
+    }
+
+    public CreditRequest saveCreditRequest(@NonNull CreditRequest creditRequest){
+        return creditRequestRepository.save(creditRequest);
     }
 }

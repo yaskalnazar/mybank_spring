@@ -6,16 +6,17 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.testing.demo_jpa.dto.UsersDTO;
-import ua.testing.demo_jpa.entity.Account;
-import ua.testing.demo_jpa.entity.CreditRequest;
+import ua.testing.demo_jpa.entity.*;
 import ua.testing.demo_jpa.service.AccountService;
 import ua.testing.demo_jpa.service.CreditRequestService;
 import ua.testing.demo_jpa.service.UserService;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Slf4j
@@ -44,7 +45,7 @@ public class AdminController {
         UsersDTO userDTO =  userService.getAllUsers();
         log.info("{}", userDTO);
         model.put("users", userDTO.getUsers());
-        return "all_users";
+        return "admin/all_users";
     }
 
     @RequestMapping("/all_accounts")
@@ -66,5 +67,52 @@ public class AdminController {
         return ResponseEntity
                 .status(HttpStatus.BAD_REQUEST)
                 .body("{\"message\": \"" + ex.getMessage() + "\"}");
+    }
+
+    @GetMapping(value = "/user/{id}")
+    public String getUser(Model model, @PathVariable Long id){
+        model.addAttribute("user",  userService.loadUserById(id));
+        return "admin/user_info";
+    }
+
+    @GetMapping(value = "/credit_request/{id}")
+    public String processingCreditRequest(Map<String, Object> model, @PathVariable Long id){
+        CreditRequest creditRequest = creditRequestService.loadCreditRequestById(id);
+        User applicant = creditRequest.getApplicant();
+        Iterable<Account> accounts = applicant.getAccounts();
+        List<CreditAccount> creditHisory = new ArrayList<>();
+        for (Account i:accounts){
+            if (i.getAccountType().equals(Account.AccountType.CREDIT.name())){
+                creditHisory.add((CreditAccount) i);
+            }
+        }
+        model.put("creditRequest",  creditRequestService.loadCreditRequestById(id));
+        model.put("applicant", applicant);
+        model.put("creditHistory", creditHisory);
+
+        return "admin/credit_request";
+    }
+
+    @PostMapping(value = "/credit_request/{id}")
+    public String processingCreditRequest(Map<String, Object> model, @PathVariable Long id, @RequestParam String action){
+        log.error(action);
+        CreditRequest creditRequest = creditRequestService.loadCreditRequestById(id);
+        if (action.equals(CreditRequest.CreditRequestStatus.APPROVED.name())){
+            creditRequest.setCreditRequestStatus(CreditRequest.CreditRequestStatus.APPROVED);
+            Account result = accountService.saveNewAccount(CreditAccount.builder()
+                    .balance(new BigDecimal(0))
+                    .closingDate(LocalDate.now().plusYears(5))
+                    .owner(creditRequest.getApplicant())
+                    .accountStatus(Account.AccountStatus.ACTIVE)
+                    //.transactions(new ArrayList<>())
+                    .creditRate(creditRequest.getCreditRate())
+                    .creditLimit(creditRequest.getCreditLimit())
+                    .accruedInterest(new BigDecimal(0))
+                    .build());
+        } else if(action.equals(CreditRequest.CreditRequestStatus.REJECTED.name())){
+            creditRequest.setCreditRequestStatus(CreditRequest.CreditRequestStatus.REJECTED);
+        }
+        creditRequestService.saveCreditRequest(creditRequest);
+        return "redirect:/home";
     }
 }

@@ -11,7 +11,7 @@
 </head>
 <body>
 <#include "../parts/admin_navnar.ftl">
-<h1>All accounts:</h1>
+<h1>All creditRequests:</h1>
 <#if creditRequests?has_content>
 
 <table class="table">
@@ -22,16 +22,21 @@
         <th>CreditRate</th>
         <th>CreditLimit</th>
         <th>CreationDate</th>
+        <th>Status</th>
     </tr>
     </thead>
     <tbody>
     <#list creditRequests as creditRequest>
     <tr>
-        <td>${creditRequest.getRequestId()}</td>
-        <td>${creditRequest.getApplicant().getEmail()}</td>
+        <td><a href="/admin/credit_request/${creditRequest.getRequestId()}">
+            ${creditRequest.getRequestId()}</a></td>
+        <td><a href="/admin/user/${creditRequest.getApplicant().getUserId()}">
+                ${creditRequest.getApplicant().getEmail()}</a></td>
+        <th>Credit history</th>
         <td>${creditRequest.getCreditRate()}</td>
         <td>${creditRequest.getCreditLimit()}</td>
         <td>${creditRequest.getCreationDate()}</td>
+        <td>${creditRequest.getCreditRequestStatus()}</td>
     </tr>
     </#list>
     </tbody>

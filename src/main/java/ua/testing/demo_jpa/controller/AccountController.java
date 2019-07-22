@@ -104,7 +104,7 @@ public class AccountController {
     @PostMapping(value = "/credit/open/")
     public String openDeposit(CreditRequestDTO creditRequestDTO, Model model) {
         log.info(creditRequestDTO.toString());
-        CreditRequest result = creditRequestService.saveNewCreditRequest(
+        CreditRequest result = creditRequestService.saveCreditRequest(
                 CreditRequest.builder()
                         .creditRequestStatus(CreditRequest.CreditRequestStatus.PENDING)
                         .applicant(userService.getCurrentUser())
