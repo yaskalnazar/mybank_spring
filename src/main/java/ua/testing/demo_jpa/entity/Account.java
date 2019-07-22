@@ -15,30 +15,28 @@ import java.util.List;
 @Inheritance
 @SuperBuilder
 @SuppressWarnings("ACCOUNT")
-@DiscriminatorColumn(name="accountType",
+@DiscriminatorColumn(name = "accountType",
         discriminatorType = DiscriminatorType.STRING)
-/*@Table( name="account",
-        uniqueConstraints={@UniqueConstraint(columnNames={"id"})})*/
+@Table( name="accounts",
+        uniqueConstraints={@UniqueConstraint(columnNames={"account_id"})})
 public abstract class Account {
     @Id
-    @GeneratedValue (strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "account_id", nullable = false)
+    private long accountId;
     @Column(nullable = false)
     private BigDecimal balance;
-    @Column(name = "closing_date",nullable = false)
+    @Column(name = "closing_date", nullable = false)
     private LocalDate closingDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User owner;
+    /*@ManyToMany(fetch = FetchType.LAZY)
+    private List<Transaction> transactions;*/
     @Column(nullable = false)
-    private long ownerId;
-    @Column(nullable = false)
-    @ElementCollection(targetClass = Transaction.class, fetch = FetchType.EAGER)
-    private List<Transaction> transactions;
-    @Column(nullable = false)
-    private AccountStatus status;
+    private AccountStatus accountStatus;
 
 
     public abstract String getAccountType();
-
 
 
     public enum AccountStatus {

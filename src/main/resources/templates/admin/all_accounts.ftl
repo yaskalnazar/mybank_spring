@@ -28,10 +28,10 @@
     <tbody>
     <#list accounts as account>
     <tr>
-        <td>${account.getId()}</td>
-        <td>${account.getOwnerId()}</td>
+        <td>${account.getAccountId()}</td>
+        <td>${account.getOwner().getEmail()}</td>
         <td>${account.getBalance()}</td>
-        <td>${account.getStatus()}</td>
+        <td>${account.getAccountStatus()}</td>
         <td>${account.getClosingDate()}</td>
         <td>${account.getAccountType()}</td>
     </tr>

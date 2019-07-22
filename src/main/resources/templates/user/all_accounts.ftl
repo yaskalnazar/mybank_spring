@@ -57,9 +57,9 @@
         <tbody>
         <#list depositAccounts as account>
             <tr>
-                <td>${account.getId()}</td>
+                <td>${account.getAccountId()}</td>
                 <td>${account.getBalance()}</td>
-                <td>${account.getStatus()}</td>
+                <td>${account.getAccountStatus()}</td>
                 <td>${account.getClosingDate()}</td>
                 <td>${account.getDepositAmount()}</td>
                 <td>${account.getDepositRate()}</td>

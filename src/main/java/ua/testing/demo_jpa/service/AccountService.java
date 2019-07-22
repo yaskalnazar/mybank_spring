@@ -30,7 +30,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public AccountsDTO getUserAccounts(long userId){
-        return new AccountsDTO(accountRepository.findAllByOwnerId(userId));
+    public AccountsDTO getUserAccounts(User user){
+        return new AccountsDTO(accountRepository.findAllByOwner(user));
     }
 }

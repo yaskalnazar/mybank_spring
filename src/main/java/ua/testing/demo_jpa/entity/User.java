@@ -15,13 +15,13 @@ import java.util.List;
 @ToString
 
 @Entity
-@Table( name="user",
+@Table( name="users",
         uniqueConstraints={@UniqueConstraint(columnNames={"email"})})
 public class User implements UserDetails {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
     @Column(name = "first_name", nullable = false)
     private String firstName;
     @Column(name = "last_name", nullable = false)
@@ -30,7 +30,7 @@ public class User implements UserDetails {
     private String email;
     @Column(nullable = false)
     private String password;
-    @ElementCollection(targetClass = Account.class)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
     List<Account> accounts;
 
     @ElementCollection(targetClass = RoleType.class, fetch = FetchType.EAGER)

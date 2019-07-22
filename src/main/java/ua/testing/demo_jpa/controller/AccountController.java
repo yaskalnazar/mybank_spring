@@ -22,14 +22,18 @@ import java.util.List;
 import java.util.Map;
 
 @Slf4j
+
 @Controller
 @PreAuthorize("hasAuthority('ROLE_USER')")
 @RequestMapping(value = "/user/account")
 public class AccountController {
-    @Autowired
     private AccountService accountService;
-    @Autowired
     private UserService userService;
+
+    public AccountController(AccountService accountService, UserService userService) {
+        this.accountService = accountService;
+        this.userService = userService;
+    }
 
     @GetMapping(value = "/deposit/open/")
     public String openDeposit(Model model){
@@ -42,9 +46,9 @@ public class AccountController {
         Account result = accountService.saveNewAccount(DepositAccount.builder()
                 .balance(new BigDecimal(0))
                 .closingDate(LocalDate.now().plusYears(5))
-                .ownerId(userService.getCurrentUser().getId())
-                .status(Account.AccountStatus.ACTIVE)
-                .transactions(new ArrayList<>())
+                .owner(userService.getCurrentUser())
+                .accountStatus(Account.AccountStatus.ACTIVE)
+                //.transactions(new ArrayList<>())
                 .depositAmount(depositDTO.getDepositAmount())
                 .depositEndDate(LocalDate.now().plusMonths(depositDTO.getMonthsAmount()))
                 .depositRate(depositDTO.getDepositRate())
@@ -59,7 +63,7 @@ public class AccountController {
 
     @GetMapping(value = "/all_accounts/")
     public String allUserAccounts(Map<String, Object> model){
-        Iterable<Account> accounts = accountService.getUserAccounts(userService.getCurrentUser().getId()).getAccounts();
+        Iterable<Account> accounts = accountService.getUserAccounts(userService.getCurrentUser()).getAccounts();
         List<DepositAccount> depositAccounts = new ArrayList<>();
         List<CreditAccount> creditAccounts = new ArrayList<>();
         for (Account i:accounts){
