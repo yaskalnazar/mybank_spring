@@ -15,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/user/account/deposit/open/"><@spring.message "navbar.user.deposit.open"/></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/user/account/credit/open/">Credit open</a>
+            </li>
         </ul>
     </div>
     <span style="float: right">

@@ -15,6 +15,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/admin/all_accounts"><@spring.message "all.accounts"/></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/all_credit_requests">all_credit_requests</a>
+            </li>
         </ul>
     </div>
     <span style="float: right">

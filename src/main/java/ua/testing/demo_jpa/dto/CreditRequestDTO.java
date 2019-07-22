@@ -1,5 +1,6 @@
 package ua.testing.demo_jpa.dto;
 
+
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -10,8 +11,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 @ToString
-public class DepositDTO {
-    private BigDecimal depositAmount;
-    private BigDecimal depositRate;
-    private int monthsAmount;
+public class CreditRequestDTO {
+    private BigDecimal creditRate;
+    private BigDecimal creditLimit;
 }

@@ -9,11 +9,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.8/angular.min.js"></script>
 
 </head>
-<body ng-app="users_form" ng-controller="UserCtrl">
+<body>
 <#include "../parts/admin_navnar.ftl">
-<h1 data-ng-init="getUsers()"><@spring.message "all.users"/>:</h1>
+<h1>All accounts:</h1>
+<#if users?has_content>
 
-<table ng-model="users"  class="table">
+<table class="table">
+    <thead>
     <tr>
         <th><@spring.message "holder.id"/></th>
         <th><@spring.message "holder.first.name"/></th>
@@ -26,19 +28,29 @@
         <th><@spring.message "holder.credentialsNonExpired"/></th>
         <th><@spring.message "holder.enabled"/></th>
     </tr>
-    <tr ng-repeat="u in users">
-        <td>{{u.id}}</td>
-        <td>{{u.firstName}}</td>
-        <td>{{u.lastName}}</td>
-        <td>{{u.email}}</td>
-        <td>{{u.authorities}}</td>
-        <td>{{u.password}}</td>
-        <td>{{u.accountNonExpired}}</td>
-        <td>{{u.accountNonLocked}}</td>
-        <td>{{u.credentialsNonExpired}}</td>
-        <td>{{u.enabled}}</td>
+    </thead>
+    <tbody>
+    <#list users as user>
+    <tr>
+        <td>${user.getUserId()}</td>
+        <td>${user.getFirstName()}</td>
+        <td>${user.getLastName()}</td>
+        <td>${user.getEmail()}</td>
+        <td><#list user.getAuthorities() as authorities>
+                ${authorities.getAuthority()}
+        </#list></td>
+
+        <td>${user.getPassword()}</td>
+        <td>${user.isAccountNonExpired()?c}</td>
+        <td>${user.isAccountNonLocked()?c}</td>
+        <td>${user.isCredentialsNonExpired()?c}</td>
+        <td>${user.isEnabled()?c}</td>
     </tr>
+    </#list>
+    </tbody>
 </table>
-<script type="text/javascript" src="../js/users.js"></script>
+<#else>
+    <h1>You don`t have any users yet</h1>
+</#if>
 </body>
 </html>

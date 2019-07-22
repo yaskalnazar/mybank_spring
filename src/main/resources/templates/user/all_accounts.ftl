@@ -88,9 +88,9 @@
         <tbody>
         <#list creditAccounts as account>
             <tr>
-                <td>${account.getId()}</td>
+                <td>${account.getAccountId()}</td>
                 <td>${account.getBalance()}</td>
-                <td>${account.getStatus()}</td>
+                <td>${account.getAccountStatus()}</td>
                 <td>${account.getClosingDate()}</td>
                 <td>${account.getCreditLimit()}</td>
                 <td>${account.getCreditRate()}</td>
