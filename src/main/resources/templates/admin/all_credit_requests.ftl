@@ -11,38 +11,56 @@
 </head>
 <body>
 <#include "../parts/admin_navnar.ftl">
-<h1>All creditRequests:</h1>
-<#if creditRequests?has_content>
+<div class="container" style="margin-top: 60px">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-<table class="table">
-    <thead>
-    <tr>
-        <th>equestId</th>
-        <th>Applicant().getEmail</th>
-        <th>CreditRate</th>
-        <th>CreditLimit</th>
-        <th>CreationDate</th>
-        <th>Status</th>
-    </tr>
-    </thead>
-    <tbody>
-    <#list creditRequests as creditRequest>
-    <tr>
-        <td><a href="/admin/credit_request/${creditRequest.getRequestId()}">
-            ${creditRequest.getRequestId()}</a></td>
-        <td><a href="/admin/user/${creditRequest.getApplicant().getUserId()}">
-                ${creditRequest.getApplicant().getEmail()}</a></td>
-        <th>Credit history</th>
-        <td>${creditRequest.getCreditRate()}</td>
-        <td>${creditRequest.getCreditLimit()}</td>
-        <td>${creditRequest.getCreationDate()}</td>
-        <td>${creditRequest.getCreditRequestStatus()}</td>
-    </tr>
-    </#list>
-    </tbody>
-</table>
-<#else>
-    <h1>You don`t have any accounts yet</h1>
-</#if>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/credit_requests/pending">Pending</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/credit_requests/rejected">Rejected</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/credit_requests/approved">Approved</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/credit_requests/all">All</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <#if creditRequests?has_content>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>RequestId</th>
+                <th>Applicant Email</th>
+                <th>CreditRate</th>
+                <th>CreditLimit</th>
+                <th>CreationDate</th>
+                <th>Status</th>
+            </tr>
+            </thead>
+            <tbody>
+            <#list creditRequests as creditRequest>
+                <tr>
+                    <td><a href="/admin/credit_request/${creditRequest.getRequestId()}">
+                            ${creditRequest.getRequestId()}</a></td>
+                    <td><a href="/admin/user/${creditRequest.getApplicant().getUserId()}">
+                            ${creditRequest.getApplicant().getEmail()}</a></td>
+                    <td>${creditRequest.getCreditRate()}</td>
+                    <td>${creditRequest.getCreditLimit()}</td>
+                    <td>${creditRequest.getCreationDate()}</td>
+                    <td>${creditRequest.getCreditRequestStatus()}</td>
+                </tr>
+            </#list>
+            </tbody>
+        </table>
+    <#else>
+        <h3>No requests</h3>
+    </#if>
+</div>
 </body>
 </html>

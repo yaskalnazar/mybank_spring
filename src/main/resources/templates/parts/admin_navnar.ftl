@@ -16,7 +16,7 @@
                 <a class="nav-link" href="/admin/all_accounts"><@spring.message "all.accounts"/></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/admin/all_credit_requests">all_credit_requests</a>
+                <a class="nav-link" href="/admin/credit_requests/pending">Credit requesrs</a>
             </li>
         </ul>
     </div>

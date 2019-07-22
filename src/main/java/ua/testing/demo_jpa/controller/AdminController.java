@@ -55,12 +55,6 @@ public class AdminController {
         return "admin/all_accounts";
     }
 
-    @RequestMapping("/all_credit_requests")
-    public String allCreditRequests(Map<String, Object> model){
-        Iterable<CreditRequest> creditRequests = creditRequestService.getAllCreditRequests();
-        model.put("creditRequests", creditRequests);
-        return "admin/all_credit_requests";
-    }
 
     @ExceptionHandler(RuntimeException.class)
     public ResponseEntity handleRuntimeException(RuntimeException ex) {
