@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.yaskal.model.dto.AccountsDTO;
 import ua.yaskal.model.entity.Account;
+import ua.yaskal.model.entity.DepositAccount;
 import ua.yaskal.model.entity.User;
+import ua.yaskal.model.exeptions.key.no.such.NoSuchAccountException;
 import ua.yaskal.model.repository.AccountRepository;
 
 import java.util.List;
@@ -25,6 +27,19 @@ public class AccountService {
 
     public Account saveNewAccount(@NonNull Account account) {
         return accountRepository.save(account);
+    }
+
+    public List<Account> getAllByOwnerId(long ownerId) {
+        return accountRepository.findAllByOwnerId(ownerId);
+    }
+
+    public List<Account> getAllByOwnerIdAndStatus(long ownerId, Account.AccountStatus status) {
+        return accountRepository.findAllByOwnerIdAndAccountStatus(ownerId,status);
+    }
+
+    public Account getById(long id) {
+        return accountRepository.findById(id).orElseThrow(
+                NoSuchAccountException::new);
     }
 
    /* public AccountsDTO getUserAccounts(User user){

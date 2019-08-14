@@ -1,8 +1,12 @@
 package ua.yaskal.model.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ua.yaskal.model.entity.Transaction;
-import ua.yaskal.model.repository.AccountDAO;
+import ua.yaskal.model.exeptions.key.NotEnoughMoneyException;
+import ua.yaskal.model.exeptions.key.no.such.NoSuchActiveAccountException;
+import ua.yaskal.model.repository.TransactionDAO;
 import ua.yaskal.model.repository.TransactionRepository;
 
 import java.util.List;
@@ -14,17 +18,16 @@ import java.util.List;
  */
 @Service
 public class TransactionService {
-    private AccountDAO accountDAO;
+    private TransactionDAO accountDAO;
     private TransactionRepository transactionRepository;
 
-    public TransactionService(AccountDAO accountDAO, TransactionRepository transactionRepository) {
+    public TransactionService(TransactionDAO accountDAO, TransactionRepository transactionRepository) {
         this.accountDAO = accountDAO;
         this.transactionRepository = transactionRepository;
     }
 
     public Transaction makeNewTransaction(Transaction transaction) {
-        accountDAO.sendMoney(transaction.getSenderAccountId(),transaction.getSenderAccountId(),transaction.getTransactionAmount());
-        return transactionRepository.save(transaction);
+        return accountDAO.sendMoney(transaction);
     }
 
     public List<Transaction> getAllByReceiverId(long id) {
@@ -36,7 +39,7 @@ public class TransactionService {
     }
 
     public List<Transaction> getAllByAccountId(long id) {
-        return transactionRepository.getAllBySenderAccountIdOrReceiverAccountId(id,id);
+        return transactionRepository.getAllBySenderAccountIdOrReceiverAccountId(id, id);
     }
 
 
