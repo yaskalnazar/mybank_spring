@@ -1,3 +1,4 @@
+/*
 package ua.yaskal.controller.configuration;
 
 import org.springframework.context.annotation.Bean;
@@ -32,3 +33,4 @@ public class LocaleConfiguration implements WebMvcConfigurer {
         registry.addInterceptor(localeChangeInterceptor());
     }
 }
+*/

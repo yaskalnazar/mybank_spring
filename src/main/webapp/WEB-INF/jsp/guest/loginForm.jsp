@@ -14,22 +14,20 @@
 <body>
 <jsp:include page="../parts/guestHeader.jsp"/>
 
-
-
 <div class="container" style="margin-top: 60px">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <c:if test="${not empty logoutSuccessfully}">
+            <c:if test="${logoutSuccessfully}">
                 <div class="alert alert-primary" role="alert">
                     <fmt:message key="page.message.logout.successfully"/>
                 </div>
             </c:if>
-            <c:if test="${not empty regSuccessfully}">
+            <c:if test="${regSuccessfully}">
                 <div class="alert alert-primary" role="alert">
                     <fmt:message key="page.message.registered.successfully"/>
                 </div>
             </c:if>
-            <c:if test="${not empty wrongInput}">
+            <c:if test="${wrongInput}">
                 <div class="alert alert-danger" role="alert">
                     <fmt:message key="page.message.wrong.input"/>
                 </div>

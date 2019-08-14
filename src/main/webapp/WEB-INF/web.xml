@@ -1,7 +1,7 @@
 <!--
 
 <web-app version="4.0">
-  <display-name>Archetype Created Web Application</display-name>
+&lt;!&ndash;  <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>Servl</servlet-name>
     <servlet-class>ua.yaskal.controller.Servlet</servlet-class>
@@ -48,7 +48,10 @@
 
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
-  </welcome-file-list>
+  </welcome-file-list>&ndash;&gt;
+  <error-page>
+    <location>/WEB-INF/jsp/errors/errorPage</location>
+  </error-page>
 
   <error-page>
     <error-code>404</error-code>

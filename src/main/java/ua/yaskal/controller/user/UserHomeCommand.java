@@ -1,10 +1,10 @@
 package ua.yaskal.controller.user;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import ua.yaskal.controller.JspPath;
+import ua.yaskal.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,13 +13,19 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Nazar Yaskal
  */
-@RestController
+@Controller
 @PreAuthorize("hasAuthority('USER')")
-@RequestMapping(value = "/mybank/api/user")
+@RequestMapping(value = "/api/user")
 public class UserHomeCommand {
+    private UserService userService;
 
-    @PostMapping(value = "/home")
+    public UserHomeCommand(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping(value = "/home")
     public String execute(HttpServletRequest request) {
+        request.setAttribute("user", userService.getCurrentUser());
         return JspPath.USER_HOME;
     }
 }

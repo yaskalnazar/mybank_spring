@@ -6,15 +6,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.yaskal.controller.JspPath;
 import ua.yaskal.controller.util.ValidationUtil;
-import ua.yaskal.model.dto.UserLoginDTO;
 import ua.yaskal.model.entity.User;
 import ua.yaskal.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -36,13 +36,14 @@ public class LoginController {
         this.userService = userService;
     }
 
-    @RequestMapping(value ="/login")
+    @RequestMapping(value = "/login")
     public String loginPage(@RequestParam(value = "error", required = false) String error,
                             @RequestParam(value = "logout", required = false) String logout,
+                            RedirectAttributes redirectAttributes,
                             Model model) {
-        logger.warn("fuck");
-        model.addAttribute("error", error != null);
-        model.addAttribute("logout", logout != null);
+        model.addAllAttributes(redirectAttributes.getFlashAttributes());
+        model.addAttribute("error", error!=null);
+        model.addAttribute("logoutSuccessfully", logout !=null);
 
         return JspPath.LOGIN_FORM;
     }
@@ -78,7 +79,7 @@ public class LoginController {
 
     }*/
 
-    private void signInUser(HttpServletRequest request, User user) {
+   /* private void signInUser(HttpServletRequest request, User user) {
         if (Objects.nonNull(request.getServletContext().getAttribute(user.getEmail()))) {
             ((HttpSession) request.getServletContext().getAttribute(user.getEmail())).invalidate();
             request.getServletContext().removeAttribute(user.getEmail());
@@ -98,5 +99,5 @@ public class LoginController {
 
     public void setUserService(UserService userService) {
         this.userService = userService;
-    }
+    }*/
 }
