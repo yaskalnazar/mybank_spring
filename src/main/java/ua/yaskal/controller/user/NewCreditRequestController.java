@@ -33,14 +33,14 @@ import java.util.Objects;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class NewCreditRequestCommand {
-    private final static Logger logger = Logger.getLogger(NewCreditRequestCommand.class);
+public class NewCreditRequestController {
+    private final static Logger logger = Logger.getLogger(NewCreditRequestController.class);
     private ValidationUtil validationUtil;
     private CreditRequestService creditRequestService;
     private CreditService creditService;
     private UserService userService;
 
-    public NewCreditRequestCommand(ValidationUtil validationUtil, CreditRequestService creditRequestService, CreditService creditService, UserService userService) {
+    public NewCreditRequestController(ValidationUtil validationUtil, CreditRequestService creditRequestService, CreditService creditService, UserService userService) {
         this.validationUtil = validationUtil;
         this.creditRequestService = creditRequestService;
         this.creditService = creditService;

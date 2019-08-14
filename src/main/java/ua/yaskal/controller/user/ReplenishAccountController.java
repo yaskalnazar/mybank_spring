@@ -27,15 +27,15 @@ import java.time.LocalDateTime;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class ReplenishAccountCommand {
+public class ReplenishAccountController {
     private ValidationUtil validationUtil;
     private AccountService accountService;
     private TransactionService transactionService;
     private UserService userService;
     private final static long WORKAROUND_ACCOUNT_ID = 12;
 
-    public ReplenishAccountCommand(ValidationUtil validationUtil, AccountService accountService,
-                                   TransactionService transactionService, UserService userService) {
+    public ReplenishAccountController(ValidationUtil validationUtil, AccountService accountService,
+                                      TransactionService transactionService, UserService userService) {
         this.validationUtil = validationUtil;
         this.accountService = accountService;
         this.transactionService = transactionService;

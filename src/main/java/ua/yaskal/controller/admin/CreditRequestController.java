@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.yaskal.controller.JspPath;
-import ua.yaskal.controller.util.ValidationUtil;
 import ua.yaskal.model.entity.CreditAccount;
 import ua.yaskal.model.entity.CreditRequest;
 import ua.yaskal.model.entity.User;
@@ -28,13 +27,13 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/api/admin")
-public class CreditRequestCommand{
-    private final static Logger logger = Logger.getLogger(CreditRequestCommand.class);
+public class CreditRequestController {
+    private final static Logger logger = Logger.getLogger(CreditRequestController.class);
     private CreditRequestService creditRequestService;
     private UserService userService;
     private CreditService creditService;
 
-    public CreditRequestCommand(CreditRequestService creditRequestService, UserService userService, CreditService creditService) {
+    public CreditRequestController(CreditRequestService creditRequestService, UserService userService, CreditService creditService) {
         this.creditRequestService = creditRequestService;
         this.userService = userService;
         this.creditService = creditService;

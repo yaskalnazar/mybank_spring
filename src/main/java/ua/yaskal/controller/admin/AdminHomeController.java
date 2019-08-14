@@ -14,7 +14,7 @@ import ua.yaskal.controller.JspPath;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/api/admin")
-public class AdminHomeCommand {
+public class AdminHomeController {
 
     @GetMapping(value = "/home")
     public String execute() {

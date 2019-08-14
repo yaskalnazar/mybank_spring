@@ -15,8 +15,8 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 @RequestMapping(value = "/api")
-public class LogOutCommand{
-    private final static Logger logger = Logger.getLogger(LogOutCommand.class);
+public class LogOutController {
+    private final static Logger logger = Logger.getLogger(LogOutController.class);
 
 
     public String execute(HttpServletRequest request) {

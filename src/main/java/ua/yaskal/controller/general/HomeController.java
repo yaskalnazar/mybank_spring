@@ -16,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 @RequestMapping(value = "/api")
-public class HomeCommand {
-    private final static Logger logger = Logger.getLogger(HomeCommand.class);
+public class HomeController {
+    private final static Logger logger = Logger.getLogger(HomeController.class);
     @Autowired
     private UserService userService;
 

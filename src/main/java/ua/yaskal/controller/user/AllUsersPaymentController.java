@@ -34,15 +34,15 @@ import java.util.Objects;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class AllUsersPayment {
-    private final static Logger logger = Logger.getLogger(AllUsersPayment.class);
+public class AllUsersPaymentController {
+    private final static Logger logger = Logger.getLogger(AllUsersPaymentController.class);
     @Autowired
     private PaymentService paymentService;
     private AccountService accountService;
     private TransactionService transactionService;
     private UserService userService;
 
-    public AllUsersPayment(PaymentService paymentService, AccountService accountService, TransactionService transactionService, UserService userService) {
+    public AllUsersPaymentController(PaymentService paymentService, AccountService accountService, TransactionService transactionService, UserService userService) {
         this.paymentService = paymentService;
         this.accountService = accountService;
         this.transactionService = transactionService;

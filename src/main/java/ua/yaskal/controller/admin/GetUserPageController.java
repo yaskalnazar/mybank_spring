@@ -24,13 +24,13 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/api/admin")
-public class GetUserPageCommand  {
-    private final static Logger logger = Logger.getLogger(GetUserPageCommand.class);
+public class GetUserPageController {
+    private final static Logger logger = Logger.getLogger(GetUserPageController.class);
     private UserService userService;
     private CreditService creditService;
     private DepositService depositService;
 
-    public GetUserPageCommand(UserService userService, CreditService creditService, DepositService depositService) {
+    public GetUserPageController(UserService userService, CreditService creditService, DepositService depositService) {
         this.userService = userService;
         this.creditService = creditService;
         this.depositService = depositService;

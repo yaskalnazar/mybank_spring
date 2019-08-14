@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/api/admin")
-public class AllDepositsCommand {
+public class AllDepositsController {
     private DepositService depositService;
 
-    public AllDepositsCommand(DepositService depositService) {
+    public AllDepositsController(DepositService depositService) {
         this.depositService = depositService;
     }
 

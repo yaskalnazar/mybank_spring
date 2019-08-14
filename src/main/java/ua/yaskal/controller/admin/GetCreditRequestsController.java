@@ -12,7 +12,6 @@ import ua.yaskal.model.entity.CreditRequest;
 import ua.yaskal.model.service.CreditRequestService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
 import java.util.Objects;
 
 /**
@@ -24,12 +23,12 @@ import java.util.Objects;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/api/admin")
-public class GetCreditRequestsCommand{
-    private final static Logger logger = Logger.getLogger(GetCreditRequestsCommand.class);
+public class GetCreditRequestsController {
+    private final static Logger logger = Logger.getLogger(GetCreditRequestsController.class);
     private ValidationUtil validationUtil;
     private CreditRequestService creditRequestService;
 
-    public GetCreditRequestsCommand(ValidationUtil validationUtil, CreditRequestService creditRequestService) {
+    public GetCreditRequestsController(ValidationUtil validationUtil, CreditRequestService creditRequestService) {
         this.validationUtil = validationUtil;
         this.creditRequestService = creditRequestService;
     }

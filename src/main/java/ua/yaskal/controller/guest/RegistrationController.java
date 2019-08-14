@@ -27,13 +27,13 @@ import ua.yaskal.model.service.UserService;
 
 @Controller
 @RequestMapping(value = "/api/guest")
-public class RegistrationCommand {
-    private final static Logger logger = Logger.getLogger(RegistrationCommand.class);
+public class RegistrationController {
+    private final static Logger logger = Logger.getLogger(RegistrationController.class);
     private SecurityConfiguration securityConfig;
     private ValidationUtil validationUtil;
     private UserService userService;
 
-    public RegistrationCommand(SecurityConfiguration securityConfig, ValidationUtil validationUtil, UserService userService) {
+    public RegistrationController(SecurityConfiguration securityConfig, ValidationUtil validationUtil, UserService userService) {
         this.securityConfig = securityConfig;
         this.validationUtil = validationUtil;
         this.userService = userService;

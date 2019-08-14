@@ -31,13 +31,13 @@ import java.time.LocalDateTime;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class MakePaymentCommand {
+public class MakePaymentController {
     private ValidationUtil validationUtil;
     private PaymentService paymentService;
     private AccountService accountService;
     private UserService userService;
 
-    public MakePaymentCommand(ValidationUtil validationUtil, PaymentService paymentService, AccountService accountService, UserService userService) {
+    public MakePaymentController(ValidationUtil validationUtil, PaymentService paymentService, AccountService accountService, UserService userService) {
         this.validationUtil = validationUtil;
         this.paymentService = paymentService;
         this.accountService = accountService;

@@ -2,7 +2,6 @@ package ua.yaskal.model.service;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
-import ua.yaskal.controller.admin.GetUserPageCommand;
 import ua.yaskal.model.dto.CreditRequestDTO;
 import ua.yaskal.model.entity.CreditRequest;
 import ua.yaskal.model.exeptions.key.no.such.NoSuchCreditRequestException;

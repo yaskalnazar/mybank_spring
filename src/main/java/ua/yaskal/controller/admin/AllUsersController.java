@@ -5,10 +5,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.yaskal.controller.JspPath;
-import ua.yaskal.model.service.CreditService;
+import ua.yaskal.model.service.DepositService;
+import ua.yaskal.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Collections;
 
 /**
  * This command used to get all_credits page for ADMIN.
@@ -19,17 +19,17 @@ import java.util.Collections;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/api/admin")
-public class AllCreditsCommand {
-    private CreditService creditService;
+public class AllUsersController {
+    private UserService userService;
 
-    public AllCreditsCommand(CreditService creditService) {
-        this.creditService = creditService;
+    public AllUsersController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping(value = "/account/all/credits")
+    @GetMapping(value = "/all_users")
     public String execute(HttpServletRequest request) {
-        request.setAttribute("credits", creditService.getAll());
-        return JspPath.ADMIN_ALL_CREDITS;
+        request.setAttribute("users", userService.getAll());
+        return JspPath.ADMIN_ALL_USERS;
     }
 
 

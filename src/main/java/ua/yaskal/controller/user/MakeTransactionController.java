@@ -32,13 +32,13 @@ import java.time.LocalDateTime;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class MakeTransactionCommand {
-    private final static Logger logger = Logger.getLogger(MakeTransactionCommand.class);
+public class MakeTransactionController {
+    private final static Logger logger = Logger.getLogger(MakeTransactionController.class);
     private AccountService accountService;
     private TransactionService transactionService;
     private UserService userService;
 
-    public MakeTransactionCommand(AccountService accountService, TransactionService transactionService, UserService userService) {
+    public MakeTransactionController(AccountService accountService, TransactionService transactionService, UserService userService) {
         this.accountService = accountService;
         this.transactionService = transactionService;
         this.userService = userService;

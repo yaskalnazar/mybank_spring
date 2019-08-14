@@ -1,7 +1,7 @@
 package ua.yaskal.model.service;
 
 import org.springframework.stereotype.Service;
-import ua.yaskal.controller.user.AllUsersPayment;
+import ua.yaskal.controller.user.AllUsersPaymentController;
 import ua.yaskal.model.entity.Payment;
 import ua.yaskal.model.exeptions.key.no.such.NoSuchPaymentException;
 import ua.yaskal.model.repository.PaymentRepository;
@@ -16,7 +16,7 @@ import java.util.List;
  */
 @Service
 public class PaymentService {
-    private final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(AllUsersPayment.class);
+    private final static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(AllUsersPaymentController.class);
 
     private PaymentRepository paymentRepository;
 

@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.yaskal.controller.JspPath;
-import ua.yaskal.model.entity.CreditAccount;
+import ua.yaskal.model.entity.DepositAccount;
 import ua.yaskal.model.entity.Transaction;
 import ua.yaskal.model.exeptions.key.AccessDeniedException;
 import ua.yaskal.model.exeptions.key.no.such.NoSuchAccountException;
 import ua.yaskal.model.service.AccountService;
-import ua.yaskal.model.service.CreditService;
+import ua.yaskal.model.service.DepositService;
 import ua.yaskal.model.service.TransactionService;
 import ua.yaskal.model.service.UserService;
 
@@ -30,34 +30,34 @@ import java.util.List;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class UserCreditPageCommand  {
-    private final static Logger logger = Logger.getLogger(UserCreditPageCommand.class);
-    private CreditService creditService;
+public class UserDepositPageController {
+    private final static Logger logger = Logger.getLogger(UserDepositPageController.class);
+    private DepositService depositService;
     private TransactionService transactionService;
     private AccountService accountService;
     private UserService userService;
 
-    public UserCreditPageCommand(CreditService creditService, TransactionService transactionService, AccountService accountService, UserService userService) {
-        this.creditService = creditService;
+    public UserDepositPageController(DepositService depositService, TransactionService transactionService, AccountService accountService, UserService userService) {
+        this.depositService = depositService;
         this.transactionService = transactionService;
         this.accountService = accountService;
         this.userService = userService;
     }
 
-    @GetMapping(value = "/account/credit_page")
+    @GetMapping(value = "/account/deposit_page")
     public String execute(@RequestParam(value = "id") long creditId,
                           HttpServletRequest request) {
 
         long userId = userService.getCurrentUser().getId();
 
-        CreditAccount creditAccount;
+        DepositAccount depositAccount;
         try {
-            creditAccount = creditService.getById(creditId);
+            depositAccount = depositService.getById(creditId);
         } catch (NoSuchAccountException e) {
             throw new AccessDeniedException();
         }
 
-        if (creditAccount.getOwnerId() != userId) {
+        if (depositAccount.getOwnerId() != userId) {
             logger.error("User " + userId + " attempt to access account" + creditId + " without permission");
             throw new AccessDeniedException();
         }
@@ -70,7 +70,7 @@ public class UserCreditPageCommand  {
         });
 
         request.setAttribute("transactions", transactions);
-        request.setAttribute("credit", creditAccount);
+        request.setAttribute("credit", depositAccount);
         /*request.setAttribute("activeUserAccounts",
                 accountService.getAllByOwnerIdAndStatus(userId, Account.AccountStatus.ACTIVE));*/
         return JspPath.USER_CREDIT_PAGE;

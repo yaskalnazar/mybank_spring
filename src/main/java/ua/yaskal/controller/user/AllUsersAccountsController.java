@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.yaskal.controller.JspPath;
-import ua.yaskal.model.entity.DepositAccount;
 import ua.yaskal.model.service.CreditService;
 import ua.yaskal.model.service.DepositService;
 import ua.yaskal.model.service.UserService;
@@ -21,13 +20,13 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class AllUsersAccountsCommand {
-    private final static Logger logger = Logger.getLogger(AllUsersAccountsCommand.class);
+public class AllUsersAccountsController {
+    private final static Logger logger = Logger.getLogger(AllUsersAccountsController.class);
     private DepositService depositService;
     private CreditService creditService;
     private UserService userService;
 
-    public AllUsersAccountsCommand(DepositService depositService, CreditService creditService, UserService userService) {
+    public AllUsersAccountsController(DepositService depositService, CreditService creditService, UserService userService) {
         this.depositService = depositService;
         this.creditService = creditService;
         this.userService = userService;

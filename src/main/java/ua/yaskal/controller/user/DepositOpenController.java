@@ -27,15 +27,15 @@ import java.math.BigDecimal;
 @Controller
 @PreAuthorize("hasAuthority('USER')")
 @RequestMapping(value = "/api/user")
-public class DepositOpenCommand{
-    private final static Logger logger = Logger.getLogger(DepositOpenCommand.class);
+public class DepositOpenController {
+    private final static Logger logger = Logger.getLogger(DepositOpenController.class);
     private ValidationUtil validationUtil;
     private DepositService depositService;
     private UserService userService;
    // private ScheduledService scheduledService;
 
 
-    public DepositOpenCommand(ValidationUtil validationUtil, DepositService depositService, UserService userService) {
+    public DepositOpenController(ValidationUtil validationUtil, DepositService depositService, UserService userService) {
         this.validationUtil = validationUtil;
         this.depositService = depositService;
         this.userService = userService;

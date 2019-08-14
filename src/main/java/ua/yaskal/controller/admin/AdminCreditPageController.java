@@ -12,13 +12,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.yaskal.controller.JspPath;
 import ua.yaskal.model.entity.Account;
 import ua.yaskal.model.entity.CreditAccount;
-import ua.yaskal.model.entity.DepositAccount;
 import ua.yaskal.model.entity.Transaction;
 import ua.yaskal.model.service.AccountService;
-import ua.yaskal.model.service.DepositService;
+import ua.yaskal.model.service.CreditService;
 import ua.yaskal.model.service.TransactionService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
@@ -32,23 +30,24 @@ import java.util.List;
 @Controller
 @PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping(value = "/api/admin")
-public class AdminDepositPageCommand {
-    private final static Logger logger = Logger.getLogger(AdminDepositPageCommand.class);
-    private DepositService depositService;
-    private TransactionService transactionService;
+public class AdminCreditPageController {
+    private final static Logger logger = Logger.getLogger(AdminCreditPageController.class);
+    private CreditService creditService;
     private AccountService accountService;
+    private TransactionService transactionService;
 
-    public AdminDepositPageCommand(DepositService depositService, TransactionService transactionService, AccountService accountService) {
-        this.depositService = depositService;
-        this.transactionService = transactionService;
+
+    public AdminCreditPageController(CreditService creditService, AccountService accountService, TransactionService transactionService) {
+        this.creditService = creditService;
         this.accountService = accountService;
+        this.transactionService = transactionService;
     }
 
-    @GetMapping(value = "/account/deposit_page")
+    @GetMapping(value = "/account/credit_page")
     public String execute(@RequestParam(value = "id") long creditId,
                           Model model, RedirectAttributes redirectAttributes) {
         model.addAllAttributes(redirectAttributes.getFlashAttributes());
-        DepositAccount depositAccount  = depositService.getById(creditId);
+        CreditAccount creditAccount  = creditService.getById(creditId);
 
         List<Transaction> transactions = transactionService.getAllByAccountId(creditId);
         transactions.stream().forEachOrdered(x -> {
@@ -58,11 +57,11 @@ public class AdminDepositPageCommand {
         });
 
         model.addAttribute("transactions", transactions);
-        model.addAttribute("deposit", depositAccount);
-        return JspPath.ADMIN_DEPOSIT_PAGE;
+        model.addAttribute("credit", creditAccount);
+        return JspPath.ADMIN_CREDIT_PAGE;
     }
 
-    @PostMapping(value = "/account/deposit_page")
+    @PostMapping(value = "/account/credit_page")
     public String processAnswer(@RequestParam(value = "id") long creditId,
                                 @RequestParam(value = "answer") String answer,
                                 @RequestParam(value = "blockingReason", required = false) String blockingReason,
@@ -78,8 +77,7 @@ public class AdminDepositPageCommand {
         }
         redirectAttributes.addAttribute("id", creditId);
 
-        return "redirect:/api/admin/account/deposit_page";
+        return "redirect:/api/admin/account/credit_page";
     }
-
 
 }
