@@ -1,3 +1,4 @@
+/*
 package ua.yaskal.controller;
 
 
@@ -8,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.yaskal.controller.configuration.SecurityConfiguration;
-import ua.yaskal.controller.handler.service.UserService;
+import ua.yaskal.model.service.UserService;
 import ua.yaskal.model.dto.NoteDTO;
 import ua.yaskal.model.entity.User;
 
@@ -56,3 +57,4 @@ public class RegFormController {
                 .body("{\"message\": \"" + ex.getMessage() + "\"}");
     }
 }
+*/

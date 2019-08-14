@@ -23,6 +23,8 @@ public class CreditAccount extends Account {
     private BigDecimal creditLimit;
     private BigDecimal accruedInterest;
 
+    public CreditAccount() {
+    }
 
     @Override
     public AccountType getAccountType() {

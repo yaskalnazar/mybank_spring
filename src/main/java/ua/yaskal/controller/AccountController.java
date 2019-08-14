@@ -1,3 +1,4 @@
+/*
 package ua.yaskal.controller;
 
 import lombok.extern.slf4j.Slf4j;
@@ -7,9 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.yaskal.controller.handler.service.AccountService;
-import ua.yaskal.controller.handler.service.CreditRequestService;
-import ua.yaskal.controller.handler.service.UserService;
+import ua.yaskal.model.service.AccountService;
+import ua.yaskal.model.service.CreditRequestService;
+import ua.yaskal.model.service.UserService;
 import ua.yaskal.model.dto.CreditRequestDTO;
 import ua.yaskal.model.dto.DepositDTO;
 import ua.yaskal.model.entity.Account;
@@ -42,15 +43,15 @@ public class AccountController {
     }
 
     @GetMapping(value = "/deposit/open/")
-    public String openDeposit(){
+    public String openDeposit() {
         return "user/deposit_open";
     }
 
     @PostMapping(value = "/deposit/open/")
-    public String openDeposit(DepositDTO depositDTO, Model model){
+    public String openDeposit(DepositDTO depositDTO, Model model) {
         log.error(depositDTO.toString());
-        Account result = accountService.saveNewAccount(DepositAccount.builder()
-                .balance(new BigDecimal(0))
+        Account result = accountService.saveNewAccount(DepositAccount.getBuilder()
+                .setBalance(new BigDecimal(0))
                 .closingDate(LocalDate.now().plusYears(5))
                 .owner(userService.getCurrentUser())
                 .accountStatus(Account.AccountStatus.ACTIVE)
@@ -68,14 +69,14 @@ public class AccountController {
     }
 
     @GetMapping(value = "/all_accounts/")
-    public String allUserAccounts(Map<String, Object> model){
+    public String allUserAccounts(Map<String, Object> model) {
         Iterable<Account> accounts = accountService.getUserAccounts(userService.getCurrentUser()).getAccounts();
         List<DepositAccount> depositAccounts = new ArrayList<>();
         List<CreditAccount> creditAccounts = new ArrayList<>();
-        for (Account i:accounts){
-            if (i.getAccountType().equals(Account.AccountType.DEPOSIT.name())){
+        for (Account i : accounts) {
+            if (i.getAccountType().equals(Account.AccountType.DEPOSIT.name())) {
                 depositAccounts.add((DepositAccount) i);
-            } else  if (i.getAccountType().equals(Account.AccountType.CREDIT.name())){
+            } else if (i.getAccountType().equals(Account.AccountType.CREDIT.name())) {
                 creditAccounts.add((CreditAccount) i);
             }
         }
@@ -86,12 +87,12 @@ public class AccountController {
     }
 
     @GetMapping(value = "/credit/open/")
-    public String openCredit(Map<String, Object> model){
+    public String openCredit(Map<String, Object> model) {
         Iterable<Account> accounts = accountService.getUserAccounts(userService.getCurrentUser()).getAccounts();
         List<CreditAccount> activeCreditAccounts = new ArrayList<>();
-        for (Account i:accounts){
-           if (i.getAccountType().equals(Account.AccountType.CREDIT.name())
-                   && i.getAccountStatus().equals(Account.AccountStatus.ACTIVE)){
+        for (Account i : accounts) {
+            if (i.getAccountType().equals(Account.AccountType.CREDIT.name())
+                    && i.getAccountStatus().equals(Account.AccountStatus.ACTIVE)) {
                 activeCreditAccounts.add((CreditAccount) i);
             }
         }
@@ -122,3 +123,4 @@ public class AccountController {
     }
 
 }
+*/

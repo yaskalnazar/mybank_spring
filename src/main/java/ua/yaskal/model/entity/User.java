@@ -43,6 +43,9 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
+    public User() {
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(role);
@@ -101,6 +104,12 @@ public class User implements UserDetails {
         this.patronymic = patronymic;
         this.accounts = accounts;
         this.role = role;
+
+        //TODO fix
+        accountNonExpired=true;
+        accountNonLocked=true;
+        credentialsNonExpired=true;
+        enabled=true;
     }
 
     /**

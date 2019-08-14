@@ -1,4 +1,4 @@
-package ua.yaskal.controller.handler.service;
+package ua.yaskal.model.service;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
@@ -56,6 +56,8 @@ public class UserService implements UserDetailsService {
         log.info("{}", "Authorized"+user);
         return user;
     }
+
+
 
     public User saveNewUser(@NonNull User user) {
         try {

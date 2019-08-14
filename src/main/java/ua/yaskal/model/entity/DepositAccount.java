@@ -23,6 +23,8 @@ public class DepositAccount extends Account {
     private BigDecimal depositRate;
     private LocalDate depositEndDate;
 
+    public DepositAccount() {
+    }
 
     @Override
     public AccountType getAccountType() {

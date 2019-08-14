@@ -32,6 +32,10 @@ public class CreditRequest {
     @Column(nullable = false)
     private CreditRequestStatus creditRequestStatus;
 
+
+    public CreditRequest() {
+    }
+
     public enum CreditRequestStatus {
         PENDING,
         APPROVED,

@@ -35,6 +35,8 @@ public abstract class Account {
 
     public abstract AccountType getAccountType();
 
+    public Account() {
+    }
 
     public enum AccountStatus {
         ACTIVE,

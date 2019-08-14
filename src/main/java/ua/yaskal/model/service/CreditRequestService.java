@@ -1,4 +1,4 @@
-package ua.yaskal.controller.handler.service;
+package ua.yaskal.model.service;
 
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;

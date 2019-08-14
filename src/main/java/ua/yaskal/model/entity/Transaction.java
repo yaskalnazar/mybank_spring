@@ -29,6 +29,10 @@ public class Transaction {
     @Column(nullable = false)
     private LocalDateTime date;
 
+
+    public Transaction() {
+    }
+
     public Transaction(long id, long senderAccountId, long receiverAccountId, BigDecimal transactionAmount, LocalDateTime date) {
         this.id = id;
         this.senderAccountId = senderAccountId;

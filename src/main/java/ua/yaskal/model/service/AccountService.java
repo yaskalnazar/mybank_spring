@@ -1,4 +1,4 @@
-package ua.yaskal.controller.handler.service;
+package ua.yaskal.model.service;
 
 
 import lombok.NonNull;
@@ -27,7 +27,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public AccountsDTO getUserAccounts(User user){
+   /* public AccountsDTO getUserAccounts(User user){
         return new AccountsDTO(accountRepository.findAllByOwner(user));
-    }
+    }*/
 }

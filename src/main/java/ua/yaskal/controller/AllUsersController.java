@@ -1,3 +1,4 @@
+/*
 package ua.yaskal.controller;
 
 import lombok.extern.slf4j.Slf4j;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import ua.yaskal.controller.handler.service.UserService;
+import ua.yaskal.model.service.UserService;
 import ua.yaskal.model.dto.UsersDTO;
 
 @Slf4j
@@ -39,3 +40,4 @@ public class AllUsersController {
 
 
 }
+*/

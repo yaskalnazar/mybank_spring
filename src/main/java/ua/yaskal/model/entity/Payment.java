@@ -32,6 +32,9 @@ public class Payment {
     private PaymentStatus paymentStatus;
     private String message;
 
+    public Payment() {
+    }
+
     public enum PaymentStatus {
         PENDING,
         PAID,

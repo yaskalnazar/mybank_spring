@@ -1,3 +1,4 @@
+/*
 package ua.yaskal.controller;
 
 import lombok.extern.slf4j.Slf4j;
@@ -7,9 +8,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import ua.yaskal.controller.handler.service.AccountService;
-import ua.yaskal.controller.handler.service.CreditRequestService;
-import ua.yaskal.controller.handler.service.UserService;
+import ua.yaskal.model.service.AccountService;
+import ua.yaskal.model.service.CreditRequestService;
+import ua.yaskal.model.service.UserService;
 import ua.yaskal.model.dto.UsersDTO;
 import ua.yaskal.model.entity.Account;
 import ua.yaskal.model.entity.CreditAccount;
@@ -114,3 +115,4 @@ public class AdminController {
         return "redirect:/home";
     }
 }
+*/

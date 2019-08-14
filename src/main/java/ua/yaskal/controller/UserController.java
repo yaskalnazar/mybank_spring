@@ -1,3 +1,4 @@
+/*
 package ua.yaskal.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -5,7 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ua.yaskal.controller.handler.service.UserService;
+import ua.yaskal.model.service.UserService;
 
 
 @Controller
@@ -25,3 +26,4 @@ public class UserController {
 
 
 }
+*/

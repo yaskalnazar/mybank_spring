@@ -9,7 +9,5 @@ import java.util.List;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    Account findAccountByAccountId(String accountId);
 
-    List<Account> findAllByOwner(User user);
 }
