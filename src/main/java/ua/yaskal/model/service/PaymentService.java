@@ -30,7 +30,6 @@ public class PaymentService {
     }
 
     public Payment getById(long id){
-        logger.warn("fuck"+id);
         return paymentRepository.findById(id).orElseThrow(NoSuchPaymentException::new);
     }
 

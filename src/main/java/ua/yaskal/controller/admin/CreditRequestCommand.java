@@ -45,7 +45,7 @@ public class CreditRequestCommand{
                           HttpServletRequest request) {
 
         CreditRequest creditRequest = creditRequestService.getById(
-                Long.parseLong(request.getParameter("id")));
+                requestId);
         User applicant = userService.getById(creditRequest.getApplicantId());
         request.setAttribute("creditRequest", creditRequest);
         request.setAttribute("applicant", applicant);
@@ -55,10 +55,9 @@ public class CreditRequestCommand{
     }
 
     @PostMapping(value = "/credit_request")
-    private void processAnswer(@RequestParam(value = "id") long requestId,
+    public String processAnswer(@RequestParam(value = "id") long requestId,
                                @RequestParam(value = "answer") String answer,
                                HttpServletRequest request) {
-        logger.warn(requestId);
         CreditRequest creditRequest = creditRequestService.getById(requestId);
 
         if (answer.equals("approved")) {
@@ -78,8 +77,12 @@ public class CreditRequestCommand{
 
             creditRequest.setCreditRequestStatus(CreditRequest.CreditRequestStatus.REJECTED);
             request.setAttribute("answer", "rejected");
-
         }
+        User applicant = userService.getById(creditRequest.getApplicantId());
+        request.setAttribute("creditRequest", creditRequest);
+        request.setAttribute("applicant", applicant);
+        request.setAttribute("credits", creditService.getAllByOwnerId(applicant.getId()));
+        return JspPath.ADMIN_CREDIT_REQUEST;
     }
 
 }

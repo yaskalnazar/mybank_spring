@@ -30,8 +30,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        logger.warn("fuck");
-
         http
                 .authorizeRequests()
                 .antMatchers("/api/admin/**").hasAuthority(User.Role.ADMIN.name())

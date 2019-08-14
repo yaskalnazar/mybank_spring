@@ -25,25 +25,23 @@ public class TransactionDAO {
 
 
     //TODO Credit Work;
-    @Transactional(propagation = Propagation.MANDATORY )
+    @Transactional(propagation = Propagation.MANDATORY)
     public void addAmount(Long id, BigDecimal amount) throws NotEnoughMoneyException, NoSuchAccountException {
         Account account = accountRepository.findById(id).orElseThrow(NoSuchActiveAccountException::new);
-        if (!account.getAccountStatus().equals(Account.AccountStatus.ACTIVE)){
+        if (!account.getAccountStatus().equals(Account.AccountStatus.ACTIVE)) {
             throw new NoSuchActiveAccountException();
         }
 
         BigDecimal newBalance = account.getBalance().add(amount);
-        logger.warn("dd "+account.getId()+account.getAccountStatus());
-
-        if (account.getAccountType().equals(Account.AccountType.CREDIT)){
+        if (account.getAccountType().equals(Account.AccountType.CREDIT)) {
             CreditAccount creditAccount = (CreditAccount) account;
             if (creditAccount.getBalance().add(amount).compareTo(creditAccount.getCreditLimit().negate()) < 0) {
-                logger.warn("Not enough money in account id: " +creditAccount.getId());
+                logger.warn("Not enough money in account id: " + creditAccount.getId());
                 throw new NotEnoughMoneyException();
             }
         } else {
             if (account.getBalance().add(amount).compareTo(BigDecimal.ZERO) < 0) {
-                logger.warn("Not enough money in account id: " +account.getId());
+                logger.warn("Not enough money in account id: " + account.getId());
                 throw new NotEnoughMoneyException();
             }
         }
@@ -51,21 +49,19 @@ public class TransactionDAO {
         account.setBalance(newBalance);
         accountRepository.save(account);
     }
+
     @Transactional(propagation = Propagation.MANDATORY)
-    public Transaction saveTransaction(Transaction transaction){
+    public Transaction saveTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW,
             rollbackFor = Exception.class)
     public Transaction sendMoney(Transaction transaction) throws NotEnoughMoneyException, NoSuchAccountException {
-        logger.warn("fuck");
-
         addAmount(transaction.getReceiverAccountId(), transaction.getTransactionAmount());
         addAmount(transaction.getSenderAccountId(), transaction.getTransactionAmount().negate());
         return saveTransaction(transaction);
     }
-
 
 
 }

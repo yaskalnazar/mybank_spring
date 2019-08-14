@@ -47,7 +47,6 @@ public class CreditRequestService {
     }
 
     public CreditRequest getById(long id) {
-        logger.warn(id+"FUCK");
         return creditRequestRepository.findById(id).orElseThrow(NoSuchCreditRequestException::new);
     }
 

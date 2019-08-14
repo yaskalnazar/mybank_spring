@@ -40,6 +40,13 @@ public class AccountService {
                 NoSuchAccountException::new);
     }
 
+    //TODO replace with own method
+    public void updateAccountStatus(long id, Account.AccountStatus status) {
+        Account account = accountRepository.findById(id).orElseThrow(NoSuchAccountException::new);
+        account.setAccountStatus(status);
+        accountRepository.save(account);
+    }
+
    /* public AccountsDTO getUserAccounts(User user){
         return new AccountsDTO(accountRepository.findAllByOwner(user));
     }*/

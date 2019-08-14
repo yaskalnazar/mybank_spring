@@ -66,7 +66,6 @@ public class AllUsersPayment {
                                  HttpServletRequest request) {
 
         if (answer.equals("paid")) {
-            logger.warn("fuck" +paymentId);
             Payment payment = paymentService.getById(paymentId);
 
             long userId = userService.getCurrentUser().getId();

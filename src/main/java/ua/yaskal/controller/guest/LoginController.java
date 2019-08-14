@@ -36,7 +36,7 @@ public class LoginController {
                             RedirectAttributes redirectAttributes,
                             Model model) {
         model.addAllAttributes(redirectAttributes.getFlashAttributes());
-        model.addAttribute("error", error!=null);
+        model.addAttribute("wrongInput", error!=null);
         model.addAttribute("logoutSuccessfully", logout !=null);
 
         return JspPath.LOGIN_FORM;
