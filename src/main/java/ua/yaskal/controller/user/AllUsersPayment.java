@@ -1,80 +1,79 @@
-/*
 package ua.yaskal.controller.user;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import ua.yaskal.controller.JspPath;
 import ua.yaskal.controller.util.ValidationUtil;
+import ua.yaskal.model.entity.Account;
 import ua.yaskal.model.entity.Payment;
 import ua.yaskal.model.entity.Transaction;
+import ua.yaskal.model.exeptions.key.AccessDeniedException;
+import ua.yaskal.model.exeptions.key.NotEnoughMoneyException;
+import ua.yaskal.model.exeptions.key.no.such.NoSuchAccountException;
 import ua.yaskal.model.service.AccountService;
 import ua.yaskal.model.service.PaymentService;
 import ua.yaskal.model.service.TransactionService;
+import ua.yaskal.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Objects;
 
-*/
 /**
  * This command used for getting all users payments for USER and process answer.
  * Required params: answer if payments has been paid or rejected;
  *
  * @author Nazar Yaskal
- *//*
+ */
 
-//TODO
+
+@Controller
+@PreAuthorize("hasAuthority('USER')")
+@RequestMapping(value = "/api/user")
 public class AllUsersPayment {
     private final static Logger logger = Logger.getLogger(AllUsersPayment.class);
-    private ValidationUtil validationUtil;
+    @Autowired
     private PaymentService paymentService;
     private AccountService accountService;
     private TransactionService transactionService;
+    private UserService userService;
 
-    public AllUsersPayment(ValidationUtil validationUtil, PaymentService paymentService, AccountService accountService, TransactionService transactionService) {
-        this.validationUtil = validationUtil;
+    public AllUsersPayment(PaymentService paymentService, AccountService accountService, TransactionService transactionService, UserService userService) {
         this.paymentService = paymentService;
         this.accountService = accountService;
         this.transactionService = transactionService;
+        this.userService = userService;
     }
 
-    public String execute(HttpServletRequest request) {
-        long userId = (long) request.getSession().getAttribute("userId");
 
-        if (validationUtil.isContains(request, Arrays.asList("answer","paymentId"))) {
-            processAnswer(request);
-        }
+    @GetMapping(value = "/payment/all")
+    public String execute(@RequestParam(value = "user_status", required = false) String user_status,
+                          HttpServletRequest request) {
 
-        if (!validationUtil.isContains(request, Arrays.asList("user_status"))) {
-            request.setAttribute("payments",
-                   paymentService.getAllByPayerId(userId));
-            request.setAttribute("user_status", "received");
-            return JspPath.USER_ALL_PAYMENTS;
-        }
 
-        switch (request.getParameter("user_status")) {
-            case "requester":
-                request.setAttribute("payments",
-                        paymentService.getAllByRequesterId(userId));
-                request.setAttribute("user_status", "sent");
-                break;
-            default:
-                request.setAttribute("payments",
-                        paymentService.getAllByPayerId(userId));
-                request.setAttribute("user_status", "received");
-        }
-
+        getPayments(request,user_status);
 
         return JspPath.USER_ALL_PAYMENTS;
     }
 
-    private void processAnswer(HttpServletRequest request) {
-        String answer = request.getParameter("answer");
+    @PostMapping(value = "/payment/all")
+    public String processAnswer(@RequestParam(value = "paymentId") long paymentId,
+                                 @RequestParam(value = "answer") String answer,
+                                 HttpServletRequest request) {
 
         if (answer.equals("paid")) {
-            Payment payment = paymentService.getById(
-                    Long.parseLong(request.getParameter("paymentId")));
+            logger.warn("fuck" +paymentId);
+            Payment payment = paymentService.getById(paymentId);
 
-            long userId = (long) request.getSession().getAttribute("userId");
+            long userId = userService.getCurrentUser().getId();
 
             if (accountService.getById(payment.getPayerAccountId()).getOwnerId() != userId) {
                 logger.error("User " + userId + " attempt to access account" + payment.getPayerAccountId() + " without permission");
@@ -94,28 +93,39 @@ public class AllUsersPayment {
                 request.setAttribute("paymentSuccess", true);
             } catch (NotEnoughMoneyException e) {
                 request.setAttribute("paymentError", e.getMessageKey());
+            } catch (NoSuchAccountException e){
+                request.setAttribute("paymentError", e.getMessageKey());
             }
 
         } else if (answer.equals("rejected")) {
             paymentService.updateStatusById(Payment.PaymentStatus.REJECTED,
-                    Long.parseLong(request.getParameter("paymentId")));
+                    paymentId);
+        }
+        getPayments(request,"payer");
+        return JspPath.USER_ALL_PAYMENTS;
+    }
+
+    public void getPayments(HttpServletRequest request, String user_status){
+        long userId = userService.getCurrentUser().getId();
+
+        if (Objects.isNull(user_status)) {
+            request.setAttribute("payments",
+                    paymentService.getAllByPayerId(userId));
+            request.setAttribute("user_status", "received");
+            return;
+        }
+
+        switch (user_status) {
+            case "requester":
+                request.setAttribute("payments",
+                        paymentService.getAllByRequesterId(userId));
+                request.setAttribute("user_status", "sent");
+                break;
+            default:
+                request.setAttribute("payments",
+                        paymentService.getAllByPayerId(userId));
+                request.setAttribute("user_status", "received");
         }
     }
 
-    public void setValidationUtil(ValidationUtil validationUtil) {
-        this.validationUtil = validationUtil;
-    }
-
-    public void setPaymentService(PaymentService paymentService) {
-        this.paymentService = paymentService;
-    }
-
-    public void setAccountService(AccountService accountService) {
-        this.accountService = accountService;
-    }
-
-    public void setTransactionService(TransactionService transactionService) {
-        this.transactionService = transactionService;
-    }
 }
-*/

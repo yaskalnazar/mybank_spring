@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.yaskal.controller.JspPath;
-import ua.yaskal.controller.util.ValidationUtil;
 import ua.yaskal.model.entity.Account;
 import ua.yaskal.model.entity.Transaction;
 import ua.yaskal.model.exeptions.key.AccessDeniedException;
@@ -47,7 +46,7 @@ public class MakeTransactionCommand {
     }
 
     @GetMapping(value = "/account/make_transaction")
-    public String getPage(Model model){
+    public String getPage(Model model) {
         model.addAttribute("activeUserAccounts",
                 accountService.getAllByOwnerIdAndStatus(userService.getCurrentUser().getId(),
                         Account.AccountStatus.ACTIVE));
@@ -62,28 +61,26 @@ public class MakeTransactionCommand {
         long userId = userService.getCurrentUser().getId();
 
 
+        if (accountService.getById(senderAccountId).getOwnerId() != userId) {
+            logger.error("User " + userId + " attempt to access account" + senderAccountId + " without permission");
+            throw new AccessDeniedException();
+        }
 
-            if (accountService.getById(senderAccountId).getOwnerId() != userId) {
-                logger.error("User " + userId + " attempt to access account" + senderAccountId + " without permission");
-                throw new AccessDeniedException();
-            }
+        Transaction transaction = Transaction.getBuilder()
+                .setReceiverAccount(receiverAccountId)
+                .setTransactionAmount(amount)
+                .setSenderAccount(senderAccountId)
+                .setDate(LocalDateTime.now())
+                .build();
 
-            Transaction transaction = Transaction.getBuilder()
-                    .setReceiverAccount(receiverAccountId)
-                    .setTransactionAmount(amount)
-                    .setSenderAccount(senderAccountId)
-                    .setDate(LocalDateTime.now())
-                    .build();
-
-            try {
-                transactionService.makeNewTransaction(transaction);
-                request.setAttribute("transactionSuccess", true);
-            } catch (NotEnoughMoneyException e) {
-                request.setAttribute("transactionError", e.getMessageKey());
-            } catch (NoSuchActiveAccountException e) {
-                request.setAttribute("transactionError", e.getMessageKey());
-            }
-
+        try {
+            transactionService.makeNewTransaction(transaction);
+            request.setAttribute("transactionSuccess", true);
+        } catch (NotEnoughMoneyException e) {
+            request.setAttribute("transactionError", e.getMessageKey());
+        } catch (NoSuchActiveAccountException e) {
+            request.setAttribute("transactionError", e.getMessageKey());
+        }
 
 
         request.setAttribute("activeUserAccounts", accountService.getAllByOwnerIdAndStatus(userId, Account.AccountStatus.ACTIVE));

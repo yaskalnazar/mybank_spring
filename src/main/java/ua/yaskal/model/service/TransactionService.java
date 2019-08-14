@@ -18,16 +18,16 @@ import java.util.List;
  */
 @Service
 public class TransactionService {
-    private TransactionDAO accountDAO;
+    private TransactionDAO transactionDAO;
     private TransactionRepository transactionRepository;
 
     public TransactionService(TransactionDAO accountDAO, TransactionRepository transactionRepository) {
-        this.accountDAO = accountDAO;
+        this.transactionDAO = accountDAO;
         this.transactionRepository = transactionRepository;
     }
 
     public Transaction makeNewTransaction(Transaction transaction) {
-        return accountDAO.sendMoney(transaction);
+        return transactionDAO.sendMoney(transaction);
     }
 
     public List<Transaction> getAllByReceiverId(long id) {

@@ -37,17 +37,15 @@ public class TransactionDAO {
 
         if (account.getAccountType().equals(Account.AccountType.CREDIT)){
             CreditAccount creditAccount = (CreditAccount) account;
-            if (creditAccount.getBalance().add(amount).compareTo(creditAccount.getCreditLimit()) < 0) {
+            if (creditAccount.getBalance().add(amount).compareTo(creditAccount.getCreditLimit().negate()) < 0) {
+                logger.warn("Not enough money in account id: " +creditAccount.getId());
                 throw new NotEnoughMoneyException();
             }
         } else {
             if (account.getBalance().add(amount).compareTo(BigDecimal.ZERO) < 0) {
+                logger.warn("Not enough money in account id: " +account.getId());
                 throw new NotEnoughMoneyException();
             }
-        }
-
-        if (account.getBalance().add(amount).compareTo(BigDecimal.ZERO) < 0) {
-            throw new NotEnoughMoneyException();
         }
 
         account.setBalance(newBalance);

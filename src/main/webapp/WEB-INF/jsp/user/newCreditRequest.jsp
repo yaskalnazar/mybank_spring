@@ -50,7 +50,9 @@
                             <h4><fmt:message key="page.message.credit.request.info"/>:</h4>
                             <c:set var="creditRequest" value="${creditRequest}" scope="request"/>
                             <jsp:include page="../parts/creditRequestMainInfo.jsp"/>
-                            <form method="post" name="form"  action="${pageContext.request.contextPath}/api/user/credit_request/close?id=${creditRequest.getId()}" autocomplete="off">
+                            <form method="post" name="form"
+                                <%--action="${pageContext.request.contextPath}/api/user/credit_request/close?id=${creditRequest.getId()}"--%> autocomplete="off">
+                                <input type="hidden" name="deleteId" value="${creditRequest.getId()}">
                                 <button name="answer" value="rejected" type="submit" class="btn btn-danger" style="margin-top:30px">
                                     <fmt:message key="page.message.cancel"/>
                                 </button>

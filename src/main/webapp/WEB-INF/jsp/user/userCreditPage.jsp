@@ -19,10 +19,10 @@
         </div>
         <div class="col-md-8 col-md-offset-2">
             <h3><fmt:message key="page.message.transactions"/>:</h3>
-            <c:set var="transactions" value="${page.getItems()}" scope="request"/>
+           <%-- <c:set var="transactions" value="${transactions}" scope="request"/>--%>
             <jsp:include page="../parts/transactionsTable.jsp"/>
 
-            <nav aria-label="pagination">
+        <%--    <nav aria-label="pagination">
                 <ul class="pagination justify-content-center">
                     <li class="page-item ${page.getCurrentPage() == 1 ? 'disabled' : ''}">
                         <a class="page-link" href="${pageContext.request.contextPath}/api/user/account/credit_page?currentPage=${page.getCurrentPage() - 1}&id=${credit.getId()}">
@@ -40,7 +40,7 @@
                         </a>
                     </li>
                 </ul>
-            </nav>
+            </nav>--%>
 
         </div>
     </div>
