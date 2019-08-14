@@ -25,12 +25,13 @@ public class HomeCommand {
     private UserService userService;
 
     @RequestMapping("/home")
-    public String execute() {
+    public String execute(HttpServletRequest request) {
         User user = userService.getCurrentUser();
-        /*HttpSession session = request.getSession();
 
-        User user = (User) Optional.ofNullable(session.getAttribute("user"))
-                .orElse(User.getBuilder().setUserRole(User.Role.GUEST).build());*/
+        request.getSession().setAttribute("user", user);
+        request.getSession().setAttribute("userId", user.getId());
+        request.getSession().setAttribute("email", user.getEmail());
+
         logger.trace("User " + user.getId() + " with role " + user.getRole() + " redirect to home page");
         switch (user.getRole()) {
             case USER:
