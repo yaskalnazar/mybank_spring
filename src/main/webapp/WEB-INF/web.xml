@@ -1,0 +1,70 @@
+<!--
+
+<web-app version="4.0">
+  <display-name>Archetype Created Web Application</display-name>
+  <servlet>
+    <servlet-name>Servl</servlet-name>
+    <servlet-class>ua.yaskal.controller.Servlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Servl</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>ua.yaskal.controller.filters.EncodingFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/api/*</url-pattern>
+  </filter-mapping>
+
+    <filter>
+        <filter-name>AuthFilter</filter-name>
+        <filter-class>ua.yaskal.controller.filters.AccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AuthFilter</filter-name>
+      <url-pattern>/api/*</url-pattern>
+    </filter-mapping>
+
+  <filter>
+    <filter-name>LanguageFilter</filter-name>
+    <filter-class>ua.yaskal.controller.filters.LanguageFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>LanguageFilter</filter-name>
+    <url-pattern>/api/*</url-pattern>
+  </filter-mapping>
+
+
+  <listener>
+    <listener-class>
+        ua.yaskal.controller.listener.SessionListener
+    </listener-class>
+  </listener>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <error-page>
+    <error-code>404</error-code>
+    <location>/WEB-INF/jsp/errors/404error.jsp</location>
+  </error-page>
+
+  <error-page>
+    <exception-type>ua.yaskal.model.exceptions.message.key.MessageKeyException</exception-type>
+    <location>/WEB-INF/jsp/errors/messageKeyException.jsp</location>
+  </error-page>
+
+
+  <error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/WEB-INF/jsp/errors/error.jsp</location>
+  </error-page>
+
+</web-app>
+-->
