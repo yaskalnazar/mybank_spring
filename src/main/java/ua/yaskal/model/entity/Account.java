@@ -1,20 +1,19 @@
 package ua.yaskal.model.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
+/**
+ * This entity is general template for all accounts.
+ *
+ * @author Nazar Yaskal
+ * @see CreditAccount
+ * @see DepositAccount
+ */
+
 @Entity
 @Inheritance
-@SuperBuilder
 @SuppressWarnings("ACCOUNT")
 @DiscriminatorColumn(name = "accountType",
         discriminatorType = DiscriminatorType.STRING)
@@ -24,20 +23,17 @@ public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "account_id", nullable = false)
-    private long accountId;
+    private long id;
     @Column(nullable = false)
     private BigDecimal balance;
-    @Column(name = "closing_date", nullable = false)
+    @Column(nullable = false)
     private LocalDate closingDate;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User owner;
-    /*@ManyToMany(fetch = FetchType.LAZY)
-    private List<Transaction> transactions;*/
+    @Column(nullable = false)
+    private long ownerId;
     @Column(nullable = false)
     private AccountStatus accountStatus;
 
-
-    public abstract String getAccountType();
+    public abstract AccountType getAccountType();
 
 
     public enum AccountStatus {
@@ -51,5 +47,51 @@ public abstract class Account {
         DEPOSIT;
     }
 
+    public Account(long id, BigDecimal balance, LocalDate closingDate, long ownerId, AccountStatus accountStatus) {
+        this.id = id;
+        this.balance = balance;
+        this.closingDate = closingDate;
+        this.ownerId = ownerId;
+        this.accountStatus = accountStatus;
+    }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public BigDecimal getBalance() {
+        return balance;
+    }
+
+    public void setBalance(BigDecimal balance) {
+        this.balance = balance;
+    }
+
+    public LocalDate getClosingDate() {
+        return closingDate;
+    }
+
+    public void setClosingDate(LocalDate closingDate) {
+        this.closingDate = closingDate;
+    }
+
+    public long getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(long ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 }
