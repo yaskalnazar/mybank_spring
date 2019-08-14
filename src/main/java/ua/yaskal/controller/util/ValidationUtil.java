@@ -2,10 +2,8 @@ package ua.yaskal.controller.util;
 
 
 import org.apache.log4j.Logger;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Entity;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Objects;

@@ -1,7 +1,6 @@
 package ua.yaskal.controller.user;
 
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ import ua.yaskal.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 /**
  * This command used for getting page for replenishing account and process result.

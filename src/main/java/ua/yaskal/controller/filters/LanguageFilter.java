@@ -2,7 +2,6 @@ package ua.yaskal.controller.filters;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

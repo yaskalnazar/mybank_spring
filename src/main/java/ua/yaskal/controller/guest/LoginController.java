@@ -6,16 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.yaskal.controller.JspPath;
 import ua.yaskal.controller.util.ValidationUtil;
-import ua.yaskal.model.entity.User;
 import ua.yaskal.model.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Objects;
 
 /**
  * This command used for getting login_form for QUEST and process input.

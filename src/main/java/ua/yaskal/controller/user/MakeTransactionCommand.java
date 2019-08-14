@@ -21,7 +21,6 @@ import ua.yaskal.model.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 
 /**
  * This command used for getting page for sending transaction from one account to another.

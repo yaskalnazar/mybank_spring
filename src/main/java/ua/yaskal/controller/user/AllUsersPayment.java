@@ -4,14 +4,11 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.yaskal.controller.JspPath;
-import ua.yaskal.controller.util.ValidationUtil;
-import ua.yaskal.model.entity.Account;
 import ua.yaskal.model.entity.Payment;
 import ua.yaskal.model.entity.Transaction;
 import ua.yaskal.model.exeptions.key.AccessDeniedException;
@@ -24,7 +21,6 @@ import ua.yaskal.model.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**

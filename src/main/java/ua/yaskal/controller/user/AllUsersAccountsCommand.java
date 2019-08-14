@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ua.yaskal.controller.JspPath;
-import ua.yaskal.controller.guest.LoginController;
 import ua.yaskal.model.entity.DepositAccount;
 import ua.yaskal.model.service.CreditService;
 import ua.yaskal.model.service.DepositService;

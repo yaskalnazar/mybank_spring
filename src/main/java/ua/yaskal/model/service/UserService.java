@@ -99,4 +99,11 @@ public class UserService implements UserDetailsService {
     }
 
 
+    public List<User> getAll() {
+        return userRepository.findAll();
+    }
+
+    public User getById(long applicantId) {
+        return userRepository.findById(applicantId).orElseThrow(NoSuchUserException::new);
+    }
 }

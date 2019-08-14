@@ -6,8 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.yaskal.controller.JspPath;
 import ua.yaskal.controller.configuration.SecurityConfiguration;
@@ -15,9 +17,6 @@ import ua.yaskal.controller.util.ValidationUtil;
 import ua.yaskal.model.dto.UserRegistrationDTO;
 import ua.yaskal.model.entity.User;
 import ua.yaskal.model.service.UserService;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
 
 /**
  * This command used for getting registration_form for QUEST and process input.

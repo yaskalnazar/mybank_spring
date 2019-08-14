@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.yaskal.model.dto.AccountsDTO;
 import ua.yaskal.model.entity.Account;
-import ua.yaskal.model.entity.DepositAccount;
-import ua.yaskal.model.entity.User;
 import ua.yaskal.model.exeptions.key.no.such.NoSuchAccountException;
 import ua.yaskal.model.repository.AccountRepository;
 

@@ -14,10 +14,12 @@
 <jsp:include page="../parts/adminHeader.jsp"/>
 
 <div class="mx-1">
+<%--
     <c:set var="deposits" value="${page.getItems()}" scope="request"/>
+--%>
         <h3><fmt:message key="page.message.all.deposits"/>:</h3>
         <jsp:include page="../parts/depositsTable.jsp"/>
-        <nav aria-label="pagination">
+        <%--<nav aria-label="pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item ${page.getCurrentPage() == 1 ? 'disabled' : ''}">
                     <a class="page-link"
@@ -38,7 +40,7 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav>--%>
 </div>
 <jsp:include page="../parts/footer.jsp"/>
 </body>

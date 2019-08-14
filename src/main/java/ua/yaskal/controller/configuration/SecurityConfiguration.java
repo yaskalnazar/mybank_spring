@@ -12,11 +12,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import ua.yaskal.controller.JspPath;
-import ua.yaskal.controller.guest.LoginController;
 import ua.yaskal.controller.handler.RestAccessDeniedHandler;
-import ua.yaskal.model.service.UserService;
 import ua.yaskal.model.entity.User;
+import ua.yaskal.model.service.UserService;
 
 @Configuration
 @EnableWebSecurity

@@ -1,11 +1,7 @@
 package ua.yaskal.model.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import ua.yaskal.model.entity.Transaction;
-import ua.yaskal.model.exeptions.key.NotEnoughMoneyException;
-import ua.yaskal.model.exeptions.key.no.such.NoSuchActiveAccountException;
 import ua.yaskal.model.repository.TransactionDAO;
 import ua.yaskal.model.repository.TransactionRepository;
 

@@ -35,6 +35,7 @@
             <c:if test="${empty answer and
                 creditRequest.getCreditRequestStatus().toString().equals('PENDING')}">
                 <form method="post" style="margin-bottom: 30px" name="form" autocomplete="off">
+                    <input type="hidden" name="id" value="${creditRequest.getId()}">
                     <button name="answer" value="approved" type="submit" class="btn btn-success"
                             style="margin-top:30px">
                         <fmt:message key="page.message.approve"/>

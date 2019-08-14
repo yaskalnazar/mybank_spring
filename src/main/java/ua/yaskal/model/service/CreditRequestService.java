@@ -1,6 +1,8 @@
 package ua.yaskal.model.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import ua.yaskal.controller.admin.GetUserPageCommand;
 import ua.yaskal.model.dto.CreditRequestDTO;
 import ua.yaskal.model.entity.CreditRequest;
 import ua.yaskal.model.exeptions.key.no.such.NoSuchCreditRequestException;
@@ -15,6 +17,8 @@ import java.util.List;
  */
 @Service
 public class CreditRequestService {
+    private final static Logger logger = Logger.getLogger(CreditRequestService.class);
+
     private CreditRequestRepository creditRequestRepository;
 
     public CreditRequestService(CreditRequestRepository creditRequestRepository) {
@@ -43,6 +47,7 @@ public class CreditRequestService {
     }
 
     public CreditRequest getById(long id) {
+        logger.warn(id+"FUCK");
         return creditRequestRepository.findById(id).orElseThrow(NoSuchCreditRequestException::new);
     }
 
@@ -62,5 +67,11 @@ public class CreditRequestService {
          creditRequestRepository.deleteById(id);
     }
 
+    //TODO replace with own request
+    public void changeStatus(CreditRequest.CreditRequestStatus rejected, long id) {
+        CreditRequest creditRequest = creditRequestRepository.findById(id).orElseThrow(NoSuchCreditRequestException::new);
+        creditRequest.setCreditRequestStatus(rejected);
+        creditRequestRepository.save(creditRequest);
 
+    }
 }

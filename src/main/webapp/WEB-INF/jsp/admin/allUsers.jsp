@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="../parts/adminHeader.jsp"/>
 <div class="mx-1">
-    <c:if test="${not empty page.getItems()}">
+    <c:if test="${not empty users}">
         <h1><fmt:message key="page.message.all.users"/>:</h1>
         <table class="table">
             <thead>
@@ -27,7 +27,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${page.getItems()}" var="user">
+            <c:forEach items="${users}" var="user">
                 <tr>
                     <td>
                         <a href="${pageContext.request.contextPath}/api/admin/user_page?id=${user.getId()}">
@@ -44,7 +44,7 @@
 
             </tbody>
         </table>
-        <nav aria-label="pagination">
+       <%-- <nav aria-label="pagination">
             <ul class="pagination justify-content-center">
                 <li class="page-item ${page.getCurrentPage() == 1 ? 'disabled' : ''}">
                     <a class="page-link"
@@ -65,9 +65,9 @@
                     </a>
                 </li>
             </ul>
-        </nav>
+        </nav>--%>
     </c:if>
-    <c:if test="${empty page.getItems()}">
+    <c:if test="${empty users}">
         <div class="alert alert-warning" role="alert">
             <fmt:message key="page.message.failed.get.users"/>
         </div>
